@@ -1,0 +1,590 @@
+/* ============================================================
+   CLEAR CREEK TRAIL TOUR — Stylesheet
+   Brand: Great Peninsula Conservancy (official)
+   
+   Colors:
+     Bay Blue    #006596  (primary — wordmark, CTAs)
+     GPC Teal    #19796d  (secondary — accents, tips)
+     Moss Green  #748d39  (nature accent)
+     Bluff Brown #a45734  (warm earth)
+     Salmon      #eb6c39  (callouts, highlights)
+     Banana Slug #eaab10  (pinecone top, emphasis)
+     Salal Berry #3f2c48  (dark — splash BG)
+     Cloudy Day  #e5e2cd  (warm off-white — panels)
+   
+   Fonts (Google Fonts approximations):
+     Red Hat Display Bold  → 'Red Hat Display', weight 700
+     Red Hat Display Med   → 'Red Hat Display', weight 500
+     Red Hat Text Regular  → 'Red Hat Text', weight 400
+     Protest Riot (callouts) → 'Protest Riot'
+   ============================================================ */
+
+:root {
+  /* GPC Official Palette */
+  --bay-blue:     #006596;
+  --bay-blue-dk:  #004f75;
+  --bay-blue-lt:  #1a7fb5;
+  --gpc-teal:     #19796d;
+  --gpc-teal-lt:  #1fa394;
+  --moss:         #748d39;
+  --moss-lt:      #8fac45;
+  --bluff:        #a45734;
+  --salmon:       #eb6c39;
+  --banana:       #eaab10;
+  --berry:        #3f2c48;
+  --berry-mid:    #5a3f68;
+  --cloudy:       #e5e2cd;
+  --cloudy-dk:    #d5d1ba;
+  --gpc-black:    #1a1a1a;
+  --gpc-white:    #ffffff;
+
+  /* Semantic aliases */
+  --primary:       var(--bay-blue);
+  --primary-dk:    var(--bay-blue-dk);
+  --primary-lt:    var(--bay-blue-lt);
+  --accent:        var(--gpc-teal);
+  --accent-lt:     var(--gpc-teal-lt);
+  --surface:       var(--cloudy);
+  --text-dark:     #0d1a0d;
+  --text-mid:      #2a3a2a;
+  --text-muted:    #556655;
+
+  /* Shape */
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --radius-lg: 14px;
+
+  /* Shadow */
+  --shadow-card:  0 2px 14px rgba(0,101,150,0.14);
+  --shadow-panel: 0 -8px 36px rgba(0,0,0,0.2);
+
+  /* Typography */
+  --font-head: 'Red Hat Display', 'Montserrat', system-ui, sans-serif;
+  --font-body: 'Red Hat Text', 'Montserrat', system-ui, sans-serif;
+  --font-callout: 'Protest Riot', 'Red Hat Display', cursive;
+
+  --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; }
+body {
+  font-family: var(--font-body);
+  background: var(--berry);
+  color: var(--text-dark);
+}
+a { color: var(--bay-blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.hidden { display: none !important; }
+
+/* ============================================================
+   SPLASH SCREEN
+   ============================================================ */
+#splash {
+  position: fixed; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1000;
+  overflow-y: auto;
+  transition: opacity 0.5s ease;
+}
+#splash.fade-out { opacity: 0; pointer-events: none; }
+
+/* Deep Salal Berry background + topo contour overlay */
+.splash-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(155deg, #2a1c33 0%, #3f2c48 50%, #4a3458 100%);
+  z-index: 0;
+}
+
+/* Real GPC topographic texture — tiled over dark background */
+.splash-bg::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url('../assets/Topographic_texture_-_Dark.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.35;
+  z-index: 0;
+}
+
+/* Bay Blue accent bar along top — matches GPC nav */
+.splash-bg::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--bay-blue);
+  z-index: 1;
+}
+
+.splash-content {
+  position: relative; z-index: 1;
+  max-width: 520px; width: 100%;
+  padding: 48px 36px 48px;
+  display: flex; flex-direction: column; gap: 22px;
+  animation: slideUp 0.7s cubic-bezier(0.4,0,0.2,1) both;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* GPC Logo on splash — fir cone + wordmark, links to GPC site */
+.splash-logo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  opacity: 1;
+  transition: opacity var(--transition);
+}
+.splash-logo:hover {
+  opacity: 0.82;
+  text-decoration: none;
+}
+.splash-cone {
+  height: 64px;
+  width: auto;
+  flex-shrink: 0;
+  /* Cone is full color — looks great on dark bg as-is */
+}
+.splash-wordmark {
+  height: 52px;
+  width: auto;
+  /* Full color logo has black BG — invert to white for dark splash */
+  filter: brightness(0) invert(1);
+  opacity: 0.88;
+}
+
+/* Thin Bay Blue rule — GPC design pattern */
+.splash-rule {
+  width: 48px; height: 3px;
+  background: var(--bay-blue);
+  border: none;
+  border-radius: 1px;
+}
+
+.splash-eyebrow {
+  font-family: var(--font-head);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gpc-teal-lt);
+}
+
+/* Red Hat Display Bold headline */
+.splash-title {
+  font-family: var(--font-head);
+  font-size: clamp(2.6rem, 7vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.0;
+  color: var(--gpc-white);
+}
+.splash-title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--cloudy);
+}
+
+.splash-description {
+  font-family: var(--font-body);
+  font-size: 0.93rem;
+  line-height: 1.72;
+  color: rgba(229, 226, 205, 0.8);
+  font-weight: 400;
+}
+
+.splash-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.splash-meta span {
+  background: rgba(0,101,150,0.25);
+  border: 1px solid rgba(0,101,150,0.45);
+  color: var(--cloudy);
+  padding: 5px 14px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-head);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+
+.splash-instructions {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-left: 3px solid var(--bay-blue);
+  border-radius: var(--radius-sm);
+  padding: 18px 22px;
+}
+.splash-instructions h3 {
+  font-family: var(--font-head);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gpc-teal-lt);
+  margin-bottom: 14px;
+}
+.splash-instructions ol {
+  padding-left: 18px;
+  display: flex; flex-direction: column; gap: 9px;
+}
+.splash-instructions li {
+  font-family: var(--font-body);
+  color: rgba(229,226,205,0.72);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+.splash-instructions strong {
+  color: var(--gpc-white);
+  font-weight: 600;
+}
+
+/* GPC CTA button — Bay Blue, square corners, Red Hat bold all-caps */
+.btn-primary {
+  background: var(--bay-blue);
+  color: var(--gpc-white);
+  border: none;
+  padding: 14px 30px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-head);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  align-self: flex-start;
+  box-shadow: 0 3px 16px rgba(0,101,150,0.45);
+}
+.btn-primary:hover {
+  background: var(--bay-blue-lt);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 22px rgba(0,101,150,0.55);
+}
+.btn-primary:active { transform: translateY(0); }
+
+.splash-credit {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: rgba(229,226,205,0.35);
+}
+.splash-credit a { color: rgba(229,226,205,0.5); }
+.splash-credit a:hover { color: var(--cloudy); text-decoration: none; }
+
+/* ============================================================
+   MAIN APP
+   ============================================================ */
+#app {
+  position: fixed; inset: 0;
+  display: flex; flex-direction: column;
+}
+
+/* ---------- Header — Bay Blue bar ---------- */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  height: 54px;
+  background: var(--bay-blue);
+  border-bottom: 3px solid var(--bay-blue-dk);
+  z-index: 400;
+  flex-shrink: 0;
+  gap: 10px;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  justify-content: center;
+}
+
+/* Real GPC fir cone in header */
+.header-pinecone {
+  height: 32px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+.app-title {
+  font-family: var(--font-head);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.92);
+  white-space: nowrap;
+}
+
+.btn-icon {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.9);
+  width: 36px; height: 36px;
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background var(--transition);
+  flex-shrink: 0;
+}
+.btn-icon:hover {
+  background: rgba(255,255,255,0.28);
+  color: var(--gpc-white);
+}
+.btn-icon.locating {
+  color: var(--banana);
+  animation: pulse 1s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* ---------- Map ---------- */
+#map { flex: 1; z-index: 100; }
+
+/* Leaflet chrome styled to GPC */
+.leaflet-control-attribution {
+  font-size: 0.62rem !important;
+  background: rgba(0,37,56,0.82) !important;
+  color: rgba(229,226,205,0.6) !important;
+}
+.leaflet-control-attribution a { color: rgba(0,101,150,0.9) !important; }
+
+.leaflet-control-zoom a {
+  background: var(--bay-blue) !important;
+  color: var(--gpc-white) !important;
+  border-color: var(--bay-blue-dk) !important;
+  font-weight: 700 !important;
+}
+.leaflet-control-zoom a:hover {
+  background: var(--bay-blue-lt) !important;
+}
+
+/* ---------- Stop Markers — Bay Blue teardrop ---------- */
+.stop-marker { background: transparent !important; border: none !important; }
+
+.marker-inner {
+  width: 36px; height: 36px;
+  border-radius: 50% 50% 50% 4px;
+  transform: rotate(-45deg);
+  background: var(--bay-blue);
+  border: 2px solid var(--gpc-white);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.35), 0 0 0 1px var(--bay-blue-dk);
+  cursor: pointer;
+  transition: background 0.18s ease, box-shadow 0.18s ease;
+}
+.stop-marker .marker-inner {
+  font-family: var(--font-head);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--gpc-white);
+}
+.stop-marker:hover .marker-inner {
+  background: var(--gpc-teal);
+  box-shadow: 0 5px 16px rgba(0,0,0,0.4), 0 0 0 2px var(--gpc-teal-lt);
+}
+
+/* ---------- Location Dot ---------- */
+.location-dot { background: transparent !important; border: none !important; }
+.location-dot-inner {
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--salmon);
+  border: 2.5px solid #fff;
+  box-shadow: 0 2px 8px rgba(235,108,57,0.55);
+}
+
+/* ============================================================
+   STOP DETAIL PANEL
+   ============================================================ */
+.stop-panel {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: var(--cloudy);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  box-shadow: var(--shadow-panel);
+  padding: 10px 26px 44px;
+  z-index: 300;
+  max-height: 74vh;
+  overflow-y: auto;
+  transform: translateY(100%);
+  transition: transform var(--transition);
+  border-top: 4px solid var(--bay-blue);
+}
+.stop-panel.open { transform: translateY(0); }
+
+.panel-handle {
+  width: 36px; height: 3px;
+  background: var(--cloudy-dk);
+  border-radius: 2px;
+  margin: 8px auto 18px;
+}
+
+.panel-close {
+  position: absolute;
+  top: 14px; right: 18px;
+  background: var(--cloudy-dk);
+  border: none;
+  color: var(--text-mid);
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background var(--transition), color var(--transition);
+}
+.panel-close:hover {
+  background: var(--bay-blue);
+  color: var(--gpc-white);
+}
+
+/* Stop number badge — Teal square */
+.panel-badge {
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  width: 30px; height: 30px;
+  background: var(--gpc-teal);
+  color: var(--gpc-white);
+  font-family: var(--font-head);
+  font-size: 0.82rem;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  margin-bottom: 10px;
+}
+
+#panel-title {
+  font-family: var(--font-head);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--bay-blue-dk);
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+/* Thin Bay Blue rule under title */
+.panel-title-rule {
+  width: 40px; height: 2px;
+  background: var(--bay-blue);
+  border-radius: 1px;
+  margin-bottom: 14px;
+}
+
+.panel-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 16px;
+}
+.tag {
+  background: rgba(0,101,150,0.1);
+  border: 1px solid rgba(0,101,150,0.2);
+  color: var(--bay-blue-dk);
+  padding: 3px 10px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-head);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Stop photo */
+.panel-photo {
+  width: calc(100% + 52px);
+  margin: -10px -26px 18px -26px;
+  display: block;
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+}
+
+#panel-body {
+  font-family: var(--font-body);
+  color: var(--text-dark);
+  font-size: 0.9rem;
+  line-height: 1.74;
+}
+#panel-body p + p { margin-top: 12px; }
+#panel-body strong { font-weight: 600; color: var(--bay-blue-dk); }
+#panel-body em { font-style: italic; }
+
+/* "Look & listen" tip — Teal left border, Protest Riot label */
+.panel-tip {
+  margin-top: 18px;
+  background: rgba(25,121,109,0.08);
+  border-left: 3px solid var(--gpc-teal);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 12px 16px;
+  font-size: 0.86rem;
+  line-height: 1.62;
+  color: var(--text-mid);
+}
+.panel-tip strong {
+  font-family: var(--font-callout);
+  font-size: 0.8rem;
+  color: var(--gpc-teal) !important;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+.toast {
+  position: absolute;
+  top: 64px; left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  background: var(--berry);
+  color: var(--cloudy);
+  padding: 9px 20px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-head);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  box-shadow: var(--shadow-card);
+  z-index: 500;
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+  border-left: 3px solid var(--bay-blue);
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (min-width: 600px) {
+  .stop-panel {
+    max-width: 400px;
+    left: 12px; right: auto;
+    bottom: 12px;
+    border-radius: var(--radius-md);
+    border-top: 4px solid var(--bay-blue);
+    transform: translateX(-120%);
+    max-height: calc(100vh - 78px);
+  }
+  .stop-panel.open { transform: translateX(0); }
+}
+
+/* Scrollbar */
+.stop-panel::-webkit-scrollbar { width: 4px; }
+.stop-panel::-webkit-scrollbar-track { background: transparent; }
+.stop-panel::-webkit-scrollbar-thumb { background: rgba(0,101,150,0.2); border-radius: 2px; }

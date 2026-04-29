@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clear Creek Trail — Walking Tour | Great Peninsula Conservancy</title>
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <!--
+    GPC Fonts:
+      Red Hat Display — Headlines (Bold 700) + Subheads (Medium 500, all-caps)
+      Red Hat Text    — Body copy (Regular 400)
+      Protest Riot    — Callout labels
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,500;0,700;1,400&family=Red+Hat+Text:wght@400;600&family=Protest+Riot&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ===================== SPLASH SCREEN ===================== -->
+  <div id="splash">
+    <div class="splash-bg"></div>
+    <div class="splash-content">
+
+      <!-- GPC splash logo: fir cone mark + full wordmark — links to GPC site -->
+      <a class="splash-logo" href="https://greatpeninsula.org" target="_blank" rel="noopener">
+        <img src="assets/Fir_Cone_-_Full_Color__1_.png" alt="" class="splash-cone" />
+        <img src="assets/GPC_Main_FullColor.png" alt="Great Peninsula Conservancy" class="splash-wordmark" />
+      </a>
+
+      <hr class="splash-rule" />
+
+      <div class="splash-eyebrow">Silverdale, Washington</div>
+      <h1 class="splash-title">Clear Creek<br /><em>Walking Tour</em></h1>
+
+      <p class="splash-description">
+        Explore over 7 miles of riparian forest, wetlands, and salmon-bearing
+        creek winding through the heart of Kitsap County. Tap a stop to learn
+        the history, ecology, and stories along the way.
+      </p>
+
+      <div class="splash-instructions">
+        <h3>How to use this tour</h3>
+        <ol>
+          <li>Press <strong>Start Tour</strong> to open the map</li>
+          <li>Tap any <strong>numbered marker</strong> to read about that stop</li>
+          <li>Use <strong>My Location</strong> (◎) to find yourself on trail</li>
+          <li>Walk at your own pace — no set order required</li>
+        </ol>
+      </div>
+
+      <button id="start-btn" class="btn-primary">Start Tour →</button>
+
+      <p class="splash-credit">
+        Managed by <a href="https://greatpeninsula.org" target="_blank">Great Peninsula Conservancy</a>
+        in partnership with Kitsap County
+      </p>
+    </div>
+  </div>
+
+  <!-- ===================== MAIN APP ===================== -->
+  <div id="app" class="hidden">
+
+    <!-- Bay Blue header bar -->
+    <header class="app-header">
+      <button id="back-to-splash" class="btn-icon" title="Tour info">☰</button>
+
+      <div class="header-logo">
+        <!-- Real GPC fir cone mark -->
+        <img src="assets/Fir_Cone_-_Full_Color__1_.png" alt="" class="header-pinecone" />
+        <span class="app-title">Clear Creek Trail</span>
+      </div>
+
+      <button id="locate-btn" class="btn-icon" title="Show my location">◎</button>
+    </header>
+
+    <!-- Map -->
+    <div id="map"></div>
+
+    <!-- Stop detail panel -->
+    <div id="stop-panel" class="stop-panel hidden">
+      <div class="panel-handle"></div>
+      <button id="close-panel" class="panel-close">✕</button>
+      <div class="panel-badge" id="panel-badge">1</div>
+      <h2 id="panel-title">Stop Title</h2>
+      <div class="panel-title-rule"></div>
+      <div id="panel-body"></div>
+      <div class="panel-tip" id="panel-tip"></div>
+    </div>
+
+    <!-- Toast notification -->
+    <div id="location-toast" class="toast hidden"></div>
+
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- ===================== TOUR DATA (inline) ===================== -->
+  <script>
+const TOUR_STOPS = [
+
+  // ----------------------------------------------------------
+  {
+    id: 1,
+    title: "Silverdale Waterfront Park",
+    lat: 47.64421821,
+    lng: -122.6942896,
+    img: "",
+    tags: ["Trailhead", "History", "Waterfront"],
+    body: `
+      <p>Welcome to the southern trailhead of the Clear Creek Trail. Silverdale Waterfront Park
+      sits on the shores of Dyes Inlet — a sheltered arm of Puget Sound — and marks the end of
+      Clear Creek's journey from the uplands near Naval Base Kitsap–Bangor, down through the heart
+      of Silverdale.</p>
+      <p>This shoreline has been a gathering place for thousands of years. The Suquamish people,
+      whose ancestral territory encompasses the Kitsap Peninsula, harvested shellfish, salmon, and
+      camas along these shores long before European settlers arrived in the 1880s. The waterfront
+      you see today bears little resemblance to the tidal marsh that once extended inland — much of
+      it was filled during Silverdale's commercial development in the mid-20th century.</p>
+      <p>The trail stretching north from here follows Clear Creek for over seven miles through
+      wetlands, riparian forest, and restored floodplain — a remarkable green corridor threading
+      through Kitsap County's largest retail center.</p>
+    `,
+    tip: "Scan Dyes Inlet for diving ducks in winter — surf scoters, buffleheads, and common goldeneyes are regulars. Bald eagles frequently perch in the large conifers along the shoreline."
+  },
+
+  // ----------------------------------------------------------
+  {
+    id: 2,
+    title: "Old Mill Park",
+    lat: 47.65005222,
+    lng: -122.6886046,
+    img: "assets/dyes.jpg",
+    tags: ["History", "Industry", "Access Point"],
+    body: `
+      <p>Old Mill Park takes its name from one of Silverdale's earliest industries. A sawmill
+      operated near this site in the late 1800s, processing timber from the old-growth forest that
+      once blanketed the Kitsap Peninsula — Douglas fir, western red cedar, and hemlock, many
+      centuries old when the first axes arrived.</p>
+      <p>The mill is long gone, but the creek remains. Clear Creek was named in 1886 by Hannah
+      Schold, a homesteader who was struck by how the water ran bright and clear even after a heavy
+      storm. Restoring that clarity for salmon, for downstream communities, and for Dyes Inlet has
+      driven decades of volunteer labor along this corridor.</p>
+      <p>Old Mill Park has accessible restrooms and parking, making it a convenient southern
+      starting point for the trail. From here you can walk north to the interpretive center and
+      wetlands, or south to the waterfront park and estuary.</p>
+    `,
+    tip: "The creek between here and the waterfront is tidal at high water. Watch for great blue herons standing motionless in the shallows — ambush hunters with extraordinary patience."
+  },
+
+  // ----------------------------------------------------------
+  {
+    id: 3,
+    title: "Dyes Inlet Estuary",
+    lat: 47.64769599,
+    lng: -122.6891625,
+    img: "assets/estuary.jpg",
+    tags: ["Ecology", "Salmon", "Estuary"],
+    body: `
+      <p>Estuaries — where freshwater meets saltwater — are among the most biologically productive
+      ecosystems on the planet. The tidal zone where Clear Creek empties into Dyes Inlet is critical
+      transition habitat for salmon. Juvenile coho and chum, hatched in Clear Creek's upstream gravel
+      beds, spend weeks in this brackish mixing zone gradually acclimating to salt water before
+      heading to the open Pacific.</p>
+      <p>This process, called smoltification, is physiologically demanding and leaves fish
+      vulnerable — making estuary quality directly tied to salmon survival. Dyes Inlet supports
+      active shellfish harvesting and is closely monitored for water quality. Everything that drains
+      off Silverdale's streets and parking lots eventually reaches this water.</p>
+      <p>The work upstream — restoring the creek channel, the wetlands, the floodplain — isn't
+      just about habitat in isolation. It's about protecting the entire chain, from headwaters
+      to the southern resident orcas of Puget Sound, which depend on Chinook salmon as their
+      primary food source.</p>
+    `,
+    tip: "In late fall (October–December), look for spawning coho salmon in the lower creek shallows — dark, battered fish completing the final act of their lifecycle."
+  },
+
+  // ----------------------------------------------------------
+  {
+    id: 4,
+    title: "Estuary Viewing Platform",
+    lat: 47.65108873,
+    lng: -122.6853656,
+    img: "assets/estuaryviewing.jpg",
+    tags: ["Viewpoint", "Wildlife", "Accessible"],
+    body: `
+      <p>This viewing platform lets you observe the creek and its riparian corridor without
+      disturbing the habitat below. Riparian zones — the narrow band of vegetation lining a
+      streambank — are disproportionately important for wildlife. Though they cover only a small
+      fraction of the landscape, an estimated 70–80% of Pacific Northwest wildlife species rely
+      on them at some point in their lives.</p>
+      <p>The willows and red alders visible from here shade the creek, keeping water temperatures
+      cool enough for salmon through summer. Their leaf litter feeds the invertebrates that salmon
+      fry eat. Their roots stabilize the banks during floods. And when they fall into the water
+      as large wood, they create pools and slow-water resting habitat that fish need to move
+      upstream.</p>
+      <p>This platform is fully wheelchair accessible — part of the approximately 2.1 miles of
+      accessible trail that runs north from Silverdale Waterfront Park.</p>
+    `,
+    tip: "Belted kingfishers hunt from exposed branches over the water — listen for their loud rattling call. Common mergansers dive here regularly in winter."
+  },
+
+  // ----------------------------------------------------------
+  {
+    id: 5,
+    title: "Clear Creek Interpretive Center (Sa'qad)",
+    lat: 47.65114942,
+    lng: -122.685199,
+    img: "assets/redbarn.jpg",
+    tags: ["History", "Education", "Suquamish", "GPC"],
+    body: `
+      <p>The red barn here is the <strong>Clear Creek Sa'qad Interpretive Center</strong>, a
+      newly renovated space that serves as the hub for Great Peninsula Conservancy events,
+      community gatherings, and environmental education along the trail. "Sa'qad" is a Lushootseed
+      word — the language of the Suquamish and other Coast Salish peoples whose territory has
+      encompassed the Kitsap Peninsula for thousands of years.</p>
+      <p>From volunteer stewardship days to school field trips to community events, the barn is
+      where the Clear Creek community comes together. Check out what's happening at GPC and book
+      the space at <a href="https://greatpeninsula.org/event-calendar/" target="_blank" rel="noopener">greatpeninsula.org/event-calendar</a>.</p>
+    `,
+    tip: ""
+  },
+
+  // ----------------------------------------------------------
+  {
+    id: 6,
+    title: "Ridgetop Pavilion",
+    lat: 47.65367274,
+    lng: -122.6855467,
+    img: "assets/ridgetop.jpg",
+    tags: ["Rest Stop", "Viewpoint", "Accessible"],
+    body: `
+      <p>The Ridgetop Pavilion is the meeting place for Clear Creek Trail work parties and
+      volunteer events. If you're interested in giving back to this trail — pulling invasives,
+      maintaining the boardwalk, or restoring habitat — this is where it starts.</p>
+      <p>Find upcoming events and get involved at <a href="https://greatpeninsula.org/what-we-do/community-engagement/clear-creek-trail/clear-creek-trail-team/" target="_blank" rel="noopener">greatpeninsula.org/clear-creek-trail-team</a>.</p>
+    `,
+    tip: ""
+  },
+
+  // ----------------------------------------------------------
+  {
+    id: 7,
+    title: "Beaver Dam & Beaver Deceiver",
+    lat: 47.66535334,
+    lng: -122.6842501,
+    img: "",
+    tags: ["Ecology", "Wildlife", "Restoration", "Engineering"],
+    body: `
+      <p>North American beavers are ecosystem engineers — they reshape landscapes in ways that
+      benefit hundreds of other species. The dam here is a beaver's response to instinct: slow the
+      water, flood the valley, create a pond. The ecological result is far more complex: deeper
+      water for fish during summer low flows, sediment capture, groundwater recharge, and habitat
+      for waterfowl, amphibians, and riparian plants.</p>
+      <p>The pipe running through the dam is a <strong>Beaver Deceiver</strong> — a coexistence
+      tool that prevents flooding of the trail while still letting the beavers maintain their
+      pond. When beavers sense water flowing over their dam, instinct says plug it. The pipe
+      drains water quietly from the pond interior, stabilizing the level without triggering their
+      repair response. Beavers Northwest installed this system in 2022 after the beavers
+      responded a little too enthusiastically to the 2016 floodplain restoration and began
+      flooding trail sections downstream.</p>
+      <p>Beavers were once trapped to near-extinction across the Pacific Northwest. Their return
+      to Clear Creek is one of the trail's quieter conservation success stories.</p>
+    `,
+    tip: "Beavers are most active at dawn and dusk. Look for fresh chew marks — bright white — on willows and alders near the waterline. The dome-shaped lodge in the pond is their home and winter food cache."
+  },
+
+  // ----------------------------------------------------------
+  {
+    id: 8,
+    title: "Beaver Pond",
+    lat: 47.66515103,
+    lng: -122.6835474,
+    img: "assets/beaverpond.jpg",
+    tags: ["Ecology", "Birding", "Wetlands"],
+    body: `
+      <p>The pond here was created by the beaver dam upstream, backed up against the contours of
+      the 2016 floodplain restoration. That project excavated roughly 30,000 cubic yards of
+      material to allow Clear Creek to meander across its natural valley for the first time in
+      over a century. Engineers shaped the banks specifically to encourage beavers, and the
+      beavers have more than delivered — their pond now stores an estimated six million gallons
+      of floodwater that would otherwise surge through Silverdale's downstream infrastructure.</p>
+      <p>The pond also provides critical summer refuge for coho salmon during low-flow periods,
+      when water elsewhere in the creek becomes too shallow and warm. The willows and cattails
+      ringing the edges are largely self-planted — native vegetation recolonizing restored ground
+      on its own schedule.</p>
+      <p>This is consistently one of the best wildlife-watching spots on the entire trail system.</p>
+    `,
+    tip: "Look for wood ducks in cavity trees around the pond edges, great blue herons in the shallows, and tree swallows and violet-green swallows hawking insects over the open water in spring and summer."
+  },
+
+  // ----------------------------------------------------------
+  {
+    id: 9,
+    title: "Salmon in the Classroom Release Site",
+    lat: 47.66557191,
+    lng: -122.6839363,
+    img: "assets/sitc.jpg",
+    tags: ["Education", "Salmon", "Community", "Kids"],
+    body: `
+      <p>Each spring, hundreds of Kitsap County schoolchildren visit Clear Creek to release salmon
+      fry they've raised in their classrooms since fall — tiny fish that began as eggs and spent
+      the winter being monitored and cared for by their students. This stretch of creek is one
+      of the primary release sites.</p>
+      <p>The <strong>Salmon in the Classroom</strong> program was started in 1988 by the Central
+      Kitsap Kiwanis Club and has grown into a partnership involving the Clear Creek Task Force,
+      the Suquamish Tribe, Clean Water Kitsap, Kitsap Public Utilities, and over 30 local
+      classrooms. During field trips, students also test the creek's water quality and learn to
+      identify macroinvertebrates — aquatic insects like stoneflies and mayflies whose presence
+      signals a healthy stream.</p>
+      <p>Many of the volunteers who maintain this trail today first came to Clear Creek on a
+      classroom field trip. The program has been running long enough that some of those kids
+      now bring their own children here.</p>
+    `,
+    tip: "Salmon fry releases happen in March. In fall and winter, scan the gravel riffles for spawning coho — females excavate bowl-shaped nests called redds by fanning their tails against the streambed."
+  },
+
+  // ----------------------------------------------------------
+  {
+    id: 10,
+    title: "North Wetlands Boardwalk",
+    lat: 47.67231793,
+    lng: -122.6849601,
+    img: "assets/wetland.jpg",
+    tags: ["Ecology", "Wetlands", "Birding", "Volunteer-Built"],
+    body: `
+      <p>The boardwalk beneath your feet was built almost entirely by <strong>volunteers</strong>
+      over decades of community labor — one of the most tangible expressions of the Clear Creek
+      Task Force's mission. It spans an emergent wetland of willows, skunk cabbage, and cattails:
+      a living sponge that filters urban and agricultural runoff, stores floodwater, and provides
+      habitat that cannot be replicated once it's gone.</p>
+      <p>Wetlands were historically viewed as wasteland — things to be drained for productive use.
+      The Kitsap Peninsula lost the majority of its historic wetland acreage to drainage and
+      development during the 20th century. What remains, including this wetland, is now understood
+      to be among the most ecologically valuable land on the landscape. A single acre of healthy
+      wetland can store over a million gallons of floodwater and filter nutrients that would
+      otherwise drive algae blooms in Dyes Inlet.</p>
+      <p>Watch your footing — the boardwalk can be slick when wet. Report maintenance issues to
+      volunteer@clearcreektrail.org.</p>
+    `,
+    tip: "Spring is prime time here. Listen for red-winged blackbirds in the cattails, the mechanical winnowing of Wilson's snipe overhead at dusk, and Virginia rails calling from deep in the marsh."
+  },
+
+  // ----------------------------------------------------------
+  {
+    id: 11,
+    title: "Petersen Farm — Northern Terminus",
+    lat: 47.67700308,
+    lng: -122.6873325,
+    img: "assets/petersen.jpg",
+    tags: ["History", "Agriculture", "Conservation", "GPC"],
+    body: `
+      <p>You've reached the northern end of the Clear Creek Trail at the boundary of
+      <strong>Petersen Farm</strong> — a 142-acre working farm with history stretching to the
+      1880s, when the Levin and Holms families first homesteaded this land. Gerald and Dorothy
+      Petersen purchased the property in 1948, ran a successful dairy and beef operation for
+      decades, and were named Kitsap County's Conservation Farmers of the Year in 1956.</p>
+      <p>The farm borders 3,000 feet of salmon-bearing Clear Creek, supporting coho, chum,
+      cutthroat, and ESA-listed steelhead. Great Peninsula Conservancy purchased Petersen Farm
+      in 2025 to prevent development and keep it in agricultural use — the culmination of years
+      of community fundraising. Combined with Kitsap County's adjacent Schold Farm and nearby
+      GPC preserves, the farm completes a connected network of protected land stretching the
+      length of the Clear Creek Valley.</p>
+      <p>Future plans include extending the trail northward from here to Kegley Road, further
+      connecting communities across central and north Kitsap.</p>
+    `,
+    tip: "The open pasture edges are excellent for raptors. American kestrels hover over the fields hunting voles in fall and winter. On lucky early mornings, a short-eared owl may be quartering low over the grass."
+  }
+
+];
+
+// ============================================================
+//  MAP CONFIGURATION
+// ============================================================
+const MAP_CONFIG = {
+  center: [47.658, -122.689],
+  zoom: 14,
+  minZoom: 12,
+  maxZoom: 18
+};
+  </script>
+
+  <!-- App logic -->
+  <script src="js/app.js"></script>
+
+</body>
+</html>
