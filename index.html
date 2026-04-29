@@ -105,13 +105,48 @@
   <script>
 const TOUR_STOPS = [
 
+
+  // ----------------------------------------------------------
+   {
+    id: 1,
+    title: "Port of Silverdale",
+    lat: 47.64374777480037,
+    lng: -122.6952140520602,
+    img: "assets/port.jpg",
+    tags: ["History", "Maritime", "Community"],
+    body: `
+      <p>The pier and boat launch you see here are the modern face of an institution that has
+      anchored Silverdale's waterfront since <strong>1920</strong>. The Port of Silverdale was
+      created by special election on April 13 of that year — passing 138 votes to 16 — making
+      it one of the earliest port districts established under Washington's 1911 Port District Act.</p>
+      <p>Silverdale's story begins with loggers, who first arrived in 1854 and lived in floating
+      bunkhouses moored along this shoreline. Scandinavian immigrants followed in the 1880s,
+      clearing the logged land for farms. By 1887 those farmers had formed the Silverdale
+      Farmers' Cooperative, shipping eggs, chickens, and milk to Bremerton and Seattle markets
+      via the <strong>Puget Sound Mosquito Fleet</strong> — the swarm of privately owned steamers
+      that connected communities across the Sound before roads took over. The community grew up
+      around this wharf, and by 1920 featured a state bank, hotels, and stores.</p>
+      <p>When highways replaced boats as the main way in and out of Silverdale in the 1950s and
+      60s, the port lay dormant for fifteen years before being revived in 1965. The current pier
+      was completed in 1988 through a partnership with Kitsap County, partly funded by a
+      $121,875 mitigation payment from the U.S. Department of Defense for the construction of
+      the Trident Submarine Base at Bangor. In 2010 the Port acquired the wetlands and tidelands
+      immediately west — the same tidal habitat where Clear Creek meets Dyes Inlet. Today the
+      Port offers 1,300 linear feet of transient moorage and a public boat launch, and remains a
+      community anchor after more than a century of Silverdale waterfront history.</p>
+      <p>Learn more at <a href="https://www.portofsilverdale.com" target="_blank" rel="noopener">portofsilverdale.com</a>.</p>
+    `,
+    tip: "The port pier is a great spot to scan Dyes Inlet for marine wildlife — harbor seals regularly haul out on the floats, and Steller sea lions occasionally pass through in winter. The boat ramp area is a reliable spot for black oystercatchers at low tide."
+  },
+
+
   // ----------------------------------------------------------
   {
-    id: 1,
+    id: 2,
     title: "Silverdale Waterfront Park",
     lat: 47.64421821,
     lng: -122.6942896,
-    img: "",
+    img: "assets/waterfront.jpg",
     tags: ["Trailhead", "History", "Waterfront"],
     body: `
       <p>Welcome to the southern trailhead of the Clear Creek Trail. Silverdale Waterfront Park
@@ -129,9 +164,10 @@ const TOUR_STOPS = [
     tip: "Scan Dyes Inlet for diving ducks in winter — surf scoters, buffleheads, and common goldeneyes are regulars. Bald eagles frequently perch in the large conifers along the shoreline."
   },
 
+
   // ----------------------------------------------------------
   {
-    id: 2,
+    id: 3,
     title: "Old Mill Park",
     lat: 47.65005222,
     lng: -122.6886046,
@@ -153,9 +189,40 @@ const TOUR_STOPS = [
     tip: "The creek between here and the waterfront is tidal at high water. Watch for great blue herons standing motionless in the shallows — ambush hunters with extraordinary patience."
   },
 
+
   // ----------------------------------------------------------
   {
-    id: 3,
+    id: 4,
+    title: "Dyes Inlet",
+    lat: 47.648254622744034,
+    lng: -122.6899066341633,
+    img: "assets/inlet.jpg",
+    tags: ["Ecology", "Puget Sound", "Water Quality"],
+    body: `
+      <p><strong>Dyes Inlet</strong> is a 5-mile sheltered arm of Puget Sound — and the ultimate
+      destination of everything that flows through the Clear Creek watershed. The creek you've
+      been walking alongside empties here, carrying with it the water quality story of the entire
+      valley: the pollutants filtered by wetlands, the sediment captured by the beaver pond, the
+      flood pulses slowed by the restored floodplain.</p>
+      <p>The inlet supports active shellfish harvesting — clams, oysters, and mussels — but its
+      water quality has long been stressed by development in the surrounding watershed. Portions of
+      Dyes Inlet were closed to shellfish harvest for years due to fecal coliform contamination,
+      much of it traced to stormwater runoff from Silverdale's commercial corridors. The north end
+      of the inlet, near Silverdale Waterfront Park, acts like a collecting basin — what one
+      researcher described as "the end of a sock" — where currents pile up debris, pollutants,
+      and sediment washed in from upstream.</p>
+      <p>Southern resident orcas have been documented entering Dyes Inlet in pursuit of chum
+      salmon, making the health of this water deeply connected to the survival of one of the
+      Pacific Northwest's most iconic and endangered species. Every restoration effort on Clear
+      Creek — every invasive plant pulled, every floodplain restored, every stormwater pond
+      naturalized — ultimately flows here.</p>
+    `,
+    tip: "In November, scan the inlet for surfacing orcas — southern residents occasionally enter Dyes Inlet chasing chum salmon. Brant geese, surf scoters, and western grebes use the inlet in winter."
+  },
+
+  // ----------------------------------------------------------
+  {
+    id: 5,
     title: "Dyes Inlet Estuary",
     lat: 47.65012854127383,
     lng: -122.68585763210841,
@@ -179,9 +246,10 @@ const TOUR_STOPS = [
     tip: "In late fall (October–December), look for spawning coho salmon in the lower creek shallows: dark, battered fish completing the final act of their lifecycle."
   },
 
+
   // ----------------------------------------------------------
   {
-    id: 4,
+    id: 6,
     title: "Estuary Viewing Platform",
     lat: 47.65108873,
     lng: -122.6853656,
@@ -202,9 +270,10 @@ const TOUR_STOPS = [
     tip: "Belted kingfishers hunt from exposed branches over the water — listen for their loud rattling call." 
   },
 
+
   // ----------------------------------------------------------
   {
-    id: 5,
+    id: 7,
     title: "Clear Creek Interpretive Center (Sa'qad)",
     lat: 47.65114942,
     lng: -122.685199,
@@ -222,9 +291,10 @@ const TOUR_STOPS = [
     tip: ""
   },
 
+
   // ----------------------------------------------------------
   {
-    id: 6,
+    id: 8,
     title: "Ridgetop Pavilion",
     lat: 47.65367274,
     lng: -122.6855467,
@@ -239,9 +309,100 @@ const TOUR_STOPS = [
     tip: ""
   },
 
+
+  // ----------------------------------------------------------
+   {
+    id: 9,
+    title: "Kitsap Mall & The Urban Edge",
+    lat: 47.65512785340949,
+    lng: -122.68607324507938,
+    img: "assets/silverdalemall.jpg",
+    tags: ["History", "Development", "Stormwater"],
+    body: `
+      <p>Look west and you're looking at the reason this trail exists. <strong>Kitsap Mall</strong>,
+      which opened in 1985, anchored an explosion of commercial development that transformed the
+      Clear Creek watershed over the following decades. Big-box stores, parking lots, fast food
+      chains, and strip malls spread across what had been farmland and forest — replacing permeable
+      soil with acres of impervious concrete and asphalt.</p>
+      <p>The consequences for Clear Creek were severe. Rainfall that once soaked slowly into the
+      ground now raced off parking lots in a torrent, carrying motor oil, heavy metals, fertilizers,
+      and other pollutants directly into the creek. Flow levels that once rose and fell gradually
+      with the seasons began to spike violently after every storm — a phenomenon called
+      "flashy hydrology" that scours streambeds, destroys salmon redds, and destabilizes banks.
+      Downtown Silverdale flooded repeatedly.</p>
+      <p>The trail you're walking exists in large part because of this pressure. The Clear Creek
+      Task Force formed in 1993 specifically to protect the creek corridor from further encroachment.
+      The protected greenway you're standing in is what was saved — a narrow but vital ribbon of
+      habitat threading through one of the most commercially developed areas in Kitsap County.</p>
+    `,
+    tip: "Stormwater is identified as the greatest pollution threat to Puget Sound. What you see here — pavement, rooftops, and parking lots draining into a salmon creek — is the challenge the entire trail restoration effort is working to offset."
+  },
+
+
+  // ----------------------------------------------------------
+    {
+    id: 10,
+    title: "Stormwater Retention Ponds",
+    lat: 47.65589907624563,
+    lng: -122.68526313696526,
+    img: "",
+    tags: ["Stormwater", "Restoration", "Infrastructure"],
+    body: `
+      <p>The ponds visible here are <strong>stormwater retention facilities</strong> — engineered
+      infrastructure designed to intercept and slow the runoff pouring off Silverdale's developed
+      landscape before it reaches Clear Creek. They are both a partial solution and a symbol of
+      the problem: the fact that we need them at all reflects how dramatically development has
+      altered the watershed's natural hydrology.</p>
+      <p>A healthy forested watershed absorbs rainfall gradually, releasing it slowly into streams
+      over days and weeks. The commercial development surrounding Clear Creek replaced that
+      sponge-like landscape with impervious surfaces that shed water almost instantly. These ponds
+      attempt to recreate some of that storage capacity artificially — holding runoff back,
+      allowing sediments and some pollutants to settle out, and releasing water at a slower rate.</p>
+      <p>Kitsap County's stormwater program has worked to naturalize many of these facilities,
+      replacing mowed grass with native wetland plants that filter nutrients, provide habitat,
+      and absorb additional water. One regional facility along Silverdale Way manages and treats
+      runoff from approximately 115 acres of surrounding development before it reaches the creek.
+      It's infrastructure and ecology working together — an approach that will only become more
+      important as the climate shifts and storm intensity increases.</p>
+    `,
+    tip: "Naturalized stormwater ponds attract surprisingly good wildlife — watch for great blue herons, belted kingfishers, and dabbling ducks using the open water. Swallows hunt insects over the surface on summer evenings."
+  },
+
+  // ----------------------------------------------------------
+
+  {
+    id: 11,
+    title: "Silverdale Wetlands Restoration",
+    lat: 47.66154130327456,
+    lng: -122.68241591461756,
+    img: "assets/restoration.jpg",
+    tags: ["Restoration", "Ecology", "Award-Winning"],
+    body: `
+      <p>You're standing in the middle of one of the most ambitious stream restoration projects
+      in Kitsap County's history. The <strong>Clear Creek Floodplain Restoration</strong>,
+      completed in 2016, transformed 21 acres of channelized farmland back into a dynamic,
+      functioning floodplain — and directly addressed the chronic downtown Silverdale flooding
+      that had plagued the community for decades.</p>
+      <p>The project was designed by Natural Systems Design for Kitsap County, using hydraulic
+      modeling to identify the optimal channel location, avoid high-quality existing wetlands,
+      and reduce roadway flooding. The numbers are staggering: <strong>29,400 cubic yards</strong>
+      of material excavated, <strong>5,000 feet</strong> of restored stream channel, more than
+      <strong>500 large logs</strong> placed to create fish habitat, three 40-foot span bridges
+      installed, and 1,500 feet of old roadway removed along with two fish-barrier culverts.
+      The restored floodplain now stores <strong>18.4 acre-feet</strong> of floodwater — roughly
+      six million gallons — that would otherwise surge through downtown Silverdale.</p>
+      <p>The project won a <strong>2017 VISION 2040 Award</strong> from the Puget Sound Regional
+      Council, which recognized it for restoring 30 acres and three stream branches while building
+      on other investments throughout the Clear Creek Basin. It has since successfully restored
+      spawning and rearing habitat for both chum and coho salmon.</p>
+    `,
+    tip: "The three new bridges through this section offer some of the best creek viewing on the entire trail. In fall, watch for coho salmon navigating the newly meandered channel — they're using streambed gravel that was buried for over a century."
+  },
+
+
   // ----------------------------------------------------------
   {
-    id: 7,
+    id: 12,
     title: "Beaver Dam & Beaver Deceiver",
     lat: 47.66535334,
     lng: -122.6842501,
@@ -266,9 +427,10 @@ const TOUR_STOPS = [
     tip: "Beavers are most active at dawn and dusk. Look for fresh chew marks — bright white — on willows and alders near the waterline. The dome-shaped lodge in the pond is their home and winter food cache."
   },
 
+
   // ----------------------------------------------------------
   {
-    id: 8,
+    id: 13,
     title: "Beaver Pond",
     lat: 47.66515103,
     lng: -122.6835474,
@@ -288,9 +450,10 @@ const TOUR_STOPS = [
     tip: "Look for wood ducks in cavity trees around the pond edges, great blue herons in the shallows, and tree swallows and violet-green swallows hawking insects over the open water in spring and summer."
   },
 
+
   // ----------------------------------------------------------
   {
-    id: 9,
+    id: 14,
     title: "Salmon in the Classroom Release Site",
     lat: 47.66557191,
     lng: -122.6839363,
@@ -314,9 +477,61 @@ const TOUR_STOPS = [
     tip: "Salmon fry releases happen in March. In fall and winter, scan the gravel riffles for spawning coho — females excavate bowl-shaped nests called redds by fanning their tails against the streambed."
   },
 
+
+  // ----------------------------------------------------------
+    {
+    id: 15,
+    title: "Osprey Nesting Platform",
+    lat: 47.66578754514986,
+    lng: -122.6841054386804,
+    img: "",
+    tags: ["Wildlife", "Birding", "Restoration"],
+    body: `
+      <p>The tall wooden platform visible from the trail is an <strong>osprey nesting structure</strong>,
+      installed to support one of the Pacific Northwest's most spectacular fishing birds. Ospreys —
+      sometimes called fish hawks — are uniquely adapted predators that dive feet-first into the water
+      to snatch fish from just below the surface, a hunting technique unlike any other raptor.</p>
+      <p>Like the salmon they depend on, ospreys are a barometer of watershed health. Their return
+      to nest along Clear Creek reflects the improving water quality and fish populations that
+      decades of restoration work have made possible. A thriving osprey pair needs a reliable
+      supply of fish within a few miles of the nest — the fact that they're here is a good sign
+      for the creek.</p>
+      <p>Artificial nesting platforms like this one have helped osprey populations recover across
+      North America after they were devastated by DDT in the mid-20th century, which caused
+      eggshell thinning and widespread nesting failure. While this platoform hasn't attracted much attention from our resident seahawks, it is a common lookout for Canada Geese to watchover those walking the trail.</p>
+    `,
+    tip: "Ospreys are present April through September. Watch for them hovering 30–100 feet above the water before plunging in after fish. Their distinctive whistling call carries a long distance."
+  },
+
+
+  // ----------------------------------------------------------
+   {
+    id: 16,
+    title: "Rotary Gateway Park — Dog Park Trailhead",
+    lat: 47.667807849091965,
+    lng: -122.68194419295995,
+    img: "assets/rotary.jpg",
+    tags: ["Trailhead", "Access Point", "Community"],
+    body: `
+      <p>This is the most popular entry point to the Clear Creek Trail — <strong>Silverdale
+      Rotary Gateway Park</strong>, home to an off-leash dog park, skate park, and one of the
+      trail's best-maintained parking areas. Whether you're a daily dog-walker, a first-time
+      visitor, or a regular trail volunteer, chances are this is where your day on the trail begins.</p>
+      <p>The park was developed through a partnership between the Silverdale Rotary Club and
+      Kitsap County, reflecting the same community-driven spirit that built the boardwalks,
+      installed the Beaver Deceiver, and raised the salmon in classrooms across the county.
+      The trail system here was recognized by <em>Evening Magazine</em> viewers in 2007 as
+      the best hidden hiking trail in Western Washington, though it's no secret to locals.</p>
+      <p>The paved trail heading south from this trailhead is fully accessible for wheelchairs
+      and strollers for approximately 2.1 miles.</p>
+    `,
+    tip: "Parking fills quickly on sunny weekends, try to arrive early oruse the Old Mill Park trailhead to the south as an alternative."
+  },
+
+
   // ----------------------------------------------------------
   {
-    id: 10,
+    id: 17,
     title: "North Wetlands Boardwalk",
     lat: 47.67231793,
     lng: -122.6849601,
@@ -339,10 +554,39 @@ const TOUR_STOPS = [
     `,
     tip: "Spring is prime time here. Listen for red-winged blackbirds in the cattails, the mechanical winnowing of Wilson's snipe overhead at dusk, and Virginia rails calling from deep in the marsh."
   },
+  
+
+
+  // ----------------------------------------------------------
+  
+  {
+    id: 18,
+    title: "Schold Farm",
+    lat: 47.67334736552325,
+    lng: -122.68541851028493,
+    img: "assets/schold.jpg",
+    tags: ["History", "Agriculture", "Conservation"],
+    body: `
+      <p><strong>Schold Farm</strong> is one of the oldest homestead properties in the Clear Creek
+      Valley, and the source of the creek's name. It was <strong>Hannah Schold</strong> who named
+      Clear Creek in 1886, struck by how the water ran bright and transparent even after a heavy
+      rain — a quality she found remarkable, and one that Kitsap conservationists have worked for
+      generations to preserve and restore.</p>
+      <p>The Schold family farmed this land for generations, and Kitsap County now owns and
+      manages the property as part of the protected corridor that extends the length of the
+      Clear Creek Valley. Together with Petersen Farm to the north and the GPC-managed lands
+      below, Schold Farm forms a critical piece of the connected lands
+      that buffer the creek from development pressure.</p>
+      <p>The open fields and hedgerows here provide important habitat at the transition between
+      the trail's forested wetland sections and the upper watershed farmland.</p>
+    `,
+    tip: "The farm fields and hedgerow edges are excellent for sparrows in fall and winter — look for white-crowned, golden-crowned, and fox sparrows working through the brush. Northern harriers hunt low over the fields on winter afternoons."
+  },
+
 
   // ----------------------------------------------------------
   {
-    id: 11,
+    id: 19,
     title: "Petersen Farm — Northern Terminus",
     lat: 47.67593871292124,
     lng: -122.68636790791673,
