@@ -521,14 +521,17 @@ a:hover { text-decoration: underline; }
   text-transform: uppercase;
 }
 
-/* Stop photo */
+/* Stop photo — inset, rounded, Bay Blue top border accent */
 .panel-photo {
-  width: calc(100% + 52px);
-  margin: -10px -26px 18px -26px;
+  width: 100%;
+  margin: 0 0 18px 0;
   display: block;
   height: 200px;
   object-fit: cover;
   object-position: center;
+  border-radius: var(--radius-md);
+  border-top: 3px solid var(--bay-blue);
+  box-shadow: 0 2px 12px rgba(0,101,150,0.15);
 }
 
 #panel-body {
