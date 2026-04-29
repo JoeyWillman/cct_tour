@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Clear Creek Trail — Walking Tour | Great Peninsula Conservancy</title>
 
+    <!-- Favicon — GPC Fir Cone -->
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/favicon.png" />
+
   <!-- Leaflet -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
@@ -117,21 +121,20 @@ const TOUR_STOPS = [
     body: `
       <p>The pier and boat launch you see here are the modern face of an institution that has
       anchored Silverdale's waterfront since <strong>1920</strong>. The Port of Silverdale was
-      created by special election on April 13 of that year — passing 138 votes to 16 — making
+      created by special election on April 13 of that year, making
       it one of the earliest port districts established under Washington's 1911 Port District Act.</p>
       <p>Silverdale's story begins with loggers, who first arrived in 1854 and lived in floating
       bunkhouses moored along this shoreline. Scandinavian immigrants followed in the 1880s,
       clearing the logged land for farms. By 1887 those farmers had formed the Silverdale
       Farmers' Cooperative, shipping eggs, chickens, and milk to Bremerton and Seattle markets
-      via the <strong>Puget Sound Mosquito Fleet</strong> — the swarm of privately owned steamers
+      via the <strong>Puget Sound Mosquito Fleet</strong>, the swarm of privately owned steamers
       that connected communities across the Sound before roads took over. The community grew up
       around this wharf, and by 1920 featured a state bank, hotels, and stores.</p>
       <p>When highways replaced boats as the main way in and out of Silverdale in the 1950s and
       60s, the port lay dormant for fifteen years before being revived in 1965. The current pier
       was completed in 1988 through a partnership with Kitsap County, partly funded by a
       $121,875 mitigation payment from the U.S. Department of Defense for the construction of
-      the Trident Submarine Base at Bangor. In 2010 the Port acquired the wetlands and tidelands
-      immediately west — the same tidal habitat where Clear Creek meets Dyes Inlet. Today the
+      the Trident Submarine Base at Bangor. Today the
       Port offers 1,300 linear feet of transient moorage and a public boat launch, and remains a
       community anchor after more than a century of Silverdale waterfront history.</p>
       <p>Learn more at <a href="https://www.portofsilverdale.com" target="_blank" rel="noopener">portofsilverdale.com</a>.</p>
@@ -151,13 +154,13 @@ const TOUR_STOPS = [
     body: `
       <p>Welcome to the southern trailhead of the Clear Creek Trail. Silverdale Waterfront Park
       sits on the shores of Dyes Inlet and marks the end of
-      Clear Creek's journey from Ptersen Farm, down through the heart
+      Clear Creek's journey from Petersen Farm, down through the heart
       of Silverdale.</p>
       <p>This shoreline has been a gathering place for thousands of years. The Suquamish people,
       whose ancestral territory encompasses the Kitsap Peninsula, harvested shellfish, salmon, and
-      camas along these shores long before European settlers arrived in the 1880s. The waterfront
-      you see today bears little resemblance to the tidal marsh that once extended inland — much of
-      it was filled during Silverdale's commercial development in the mid-20th century.</p>
+      camas along these shores long before European settlers arrived in the 1800s. The waterfront
+      you see today bears little resemblance to the tidal marsh that once extended inland, much of
+      which was filled during Silverdale's commercial development in the mid-20th century.</p>
       <p>The trail stretching north from here follows Clear Creek for over seven miles through
       wetlands, riparian forest, and restored floodplain. </p>
     `,
@@ -176,13 +179,13 @@ const TOUR_STOPS = [
     body: `
       <p>Old Mill Park takes its name from one of Silverdale's earliest industries. A sawmill
       operated near this site in the late 1800s, processing timber from the old-growth forest that
-      once blanketed the Kitsap Peninsula — Douglas fir, western red cedar, and hemlock, many
+      once blanketed the Kitsap Peninsula made up of Douglas fir, western red cedar, and hemlock, many
       centuries old when the first axes arrived.</p>
       <p>The mill is long gone, but the creek remains. Clear Creek was named in 1886 by Hannah
       Schold, a homesteader who was struck by how the water ran bright and clear even after a heavy
       storm. Restoring that clarity for salmon, for downstream communities, and for Dyes Inlet has
       driven decades of volunteer work along the trail.</p>
-      <p>Old Mill Park has accessible restrooms and parking, making it a convenient southern
+      <p>Old Mill Park is a convenient southern
       starting point for the trail. From here you can walk north to the interpretive center and
       wetlands, or south to the waterfront park and estuary.</p>
     `,
@@ -199,25 +202,23 @@ const TOUR_STOPS = [
     img: "assets/inlet.jpg",
     tags: ["Ecology", "Puget Sound", "Water Quality"],
     body: `
-      <p><strong>Dyes Inlet</strong> is a 5-mile sheltered arm of Puget Sound — and the ultimate
+      <p><strong>Dyes Inlet</strong> is a 5-mile arm of Puget Sound, and the ultimate
       destination of everything that flows through the Clear Creek watershed. The creek you've
       been walking alongside empties here, carrying with it the water quality story of the entire
       valley: the pollutants filtered by wetlands, the sediment captured by the beaver pond, the
       flood pulses slowed by the restored floodplain.</p>
-      <p>The inlet supports active shellfish harvesting — clams, oysters, and mussels — but its
+      <p>The inlet supports active shellfish harvesting: clams, oysters, and mussels, but its
       water quality has long been stressed by development in the surrounding watershed. Portions of
       Dyes Inlet were closed to shellfish harvest for years due to fecal coliform contamination,
-      much of it traced to stormwater runoff from Silverdale's commercial corridors. The north end
-      of the inlet, near Silverdale Waterfront Park, acts like a collecting basin — what one
-      researcher described as "the end of a sock" — where currents pile up debris, pollutants,
+      much of it traced to stormwater runoff from Silverdale's commercial developments. The north end
+      of the inlet, near Silverdale Waterfront Park, acts like a collecting basin, what one
+      researcher described as "the end of a sock", where currents pile up debris, pollutants,
       and sediment washed in from upstream.</p>
       <p>Southern resident orcas have been documented entering Dyes Inlet in pursuit of chum
       salmon, making the health of this water deeply connected to the survival of one of the
-      Pacific Northwest's most iconic and endangered species. Every restoration effort on Clear
-      Creek — every invasive plant pulled, every floodplain restored, every stormwater pond
-      naturalized — ultimately flows here.</p>
+      Pacific Northwest's most iconic and endangered species.</p>
     `,
-    tip: "In November, scan the inlet for surfacing orcas — southern residents occasionally enter Dyes Inlet chasing chum salmon. Brant geese, surf scoters, and western grebes use the inlet in winter."
+    tip: "In November, scan the inlet for surfacing orcas, southern residents occasionally enter Dyes Inlet chasing chum salmon. Brant geese, surf scoters, and western grebes use the inlet in winter."
   },
 
   // ----------------------------------------------------------
@@ -233,7 +234,7 @@ const TOUR_STOPS = [
       ecosystems on the planet. The tidal zone where Clear Creek empties into Dyes Inlet is critical
       transition habitat for salmon. Juvenile coho and chum, hatched in Clear Creek's upstream gravel
       beds, spend weeks in this brackish mixing zone gradually acclimating to salt water before
-      heading to the open Pacific.</p>
+      heading into the Puget Sound and later the open Pacific Ocean.</p>
       <p>This process, called smoltification, is physiologically demanding and leaves fish
       vulnerable, making estuary quality directly tied to salmon survival. Dyes Inlet supports
       active shellfish harvesting and is closely monitored for water quality. Everything that drains
@@ -322,7 +323,7 @@ const TOUR_STOPS = [
       <p>Look west and you're looking at the reason this trail exists. <strong>Kitsap Mall</strong>,
       which opened in 1985, anchored an explosion of commercial development that transformed the
       Clear Creek watershed over the following decades. Big-box stores, parking lots, fast food
-      chains, and strip malls spread across what had been farmland and forest — replacing permeable
+      chains, and strip malls spread across what had been farmland and forest, replacing permeable
       soil with acres of impervious concrete and asphalt.</p>
       <p>The consequences for Clear Creek were severe. Rainfall that once soaked slowly into the
       ground now raced off parking lots in a torrent, carrying motor oil, heavy metals, fertilizers,
@@ -332,10 +333,10 @@ const TOUR_STOPS = [
       Downtown Silverdale flooded repeatedly.</p>
       <p>The trail you're walking exists in large part because of this pressure. The Clear Creek
       Task Force formed in 1993 specifically to protect the creek corridor from further encroachment.
-      The protected greenway you're standing in is what was saved — a narrow but vital ribbon of
+      The protected greenway you're standing in is a narrow but vital ribbon of
       habitat threading through one of the most commercially developed areas in Kitsap County.</p>
     `,
-    tip: "Stormwater is identified as the greatest pollution threat to Puget Sound. What you see here — pavement, rooftops, and parking lots draining into a salmon creek — is the challenge the entire trail restoration effort is working to offset."
+    tip: "Stormwater is identified as the greatest pollution threat to Puget Sound. What you see here: pavement, rooftops, and parking lots draining into a salmon creek, is the challenge the entire trail restoration effort is working to offset."
   },
 
 
@@ -348,15 +349,14 @@ const TOUR_STOPS = [
     img: "",
     tags: ["Stormwater", "Restoration", "Infrastructure"],
     body: `
-      <p>The ponds visible here are <strong>stormwater retention facilities</strong> — engineered
-      infrastructure designed to intercept and slow the runoff pouring off Silverdale's developed
+      <p>The ponds visible here are <strong>stormwater retention facilities</strong> designed to intercept and slow the runoff pouring off Silverdale's developed
       landscape before it reaches Clear Creek. They are both a partial solution and a symbol of
       the problem: the fact that we need them at all reflects how dramatically development has
       altered the watershed's natural hydrology.</p>
       <p>A healthy forested watershed absorbs rainfall gradually, releasing it slowly into streams
       over days and weeks. The commercial development surrounding Clear Creek replaced that
       sponge-like landscape with impervious surfaces that shed water almost instantly. These ponds
-      attempt to recreate some of that storage capacity artificially — holding runoff back,
+      attempt to recreate some of that storage capacity artificially by holding runoff back,
       allowing sediments and some pollutants to settle out, and releasing water at a slower rate.</p>
       <p>Kitsap County's stormwater program has worked to naturalize many of these facilities,
       replacing mowed grass with native wetland plants that filter nutrients, provide habitat,
@@ -365,7 +365,7 @@ const TOUR_STOPS = [
       It's infrastructure and ecology working together — an approach that will only become more
       important as the climate shifts and storm intensity increases.</p>
     `,
-    tip: "Naturalized stormwater ponds attract surprisingly good wildlife — watch for great blue herons, belted kingfishers, and dabbling ducks using the open water. Swallows hunt insects over the surface on summer evenings."
+    tip: "Naturalized stormwater ponds attract surprisingly good wildlife, watch for great blue herons, belted kingfishers, and dabbling ducks using the open water. Swallows hunt insects over the surface on summer evenings."
   },
 
   // ----------------------------------------------------------
@@ -473,8 +473,9 @@ const TOUR_STOPS = [
       <p>Many of the volunteers who maintain this trail today first came to Clear Creek on a
       classroom field trip. The program has been running long enough that some of those kids
       now bring their own children here.</p>
+       <p>Learn more and get involved at href="https://greatpeninsula.org/what-we-do/community-engagement/salmon-in-the-classroom/">Salmon in the Classroom</a></p>
     `,
-    tip: "Salmon fry releases happen in March. In fall and winter, scan the gravel riffles for spawning coho — females excavate bowl-shaped nests called redds by fanning their tails against the streambed."
+    tip: "Salmon fry releases happen in March. In fall and winter, scan the gravel riffles for spawning coho. Females excavate bowl-shaped nests called redds by fanning their tails against the streambed."
   },
 
 
@@ -538,19 +539,15 @@ const TOUR_STOPS = [
     img: "assets/wetland.jpg",
     tags: ["Ecology", "Wetlands", "Birding", "Volunteer-Built"],
     body: `
-      <p>The boardwalk beneath your feet was built almost entirely by <strong>volunteers</strong>
-      over decades of community labor — one of the most tangible expressions of the Clear Creek
-      Task Force's mission. It spans an emergent wetland of willows, skunk cabbage, and cattails:
-      a living sponge that filters urban and agricultural runoff, stores floodwater, and provides
-      habitat that cannot be replicated once it's gone.</p>
-      <p>Wetlands were historically viewed as wasteland — things to be drained for productive use.
+      <p>The boardwalk beneath your feet spans an emergent wetland of willows, skunk cabbage, and cattails:
+      a living sponge that filters urban and agricultural runoff, stores floodwater, and provides a refuge for wildlife in a heavily developed area.</p>
+      <p>Wetlands were historically viewed as wasteland, things to be drained for productive use.
       The Kitsap Peninsula lost the majority of its historic wetland acreage to drainage and
       development during the 20th century. What remains, including this wetland, is now understood
       to be among the most ecologically valuable land on the landscape. A single acre of healthy
       wetland can store over a million gallons of floodwater and filter nutrients that would
       otherwise drive algae blooms in Dyes Inlet.</p>
-      <p>Watch your footing — the boardwalk can be slick when wet. Report maintenance issues to
-      volunteer@clearcreektrail.org.</p>
+      <p>Watch your footing as the boardwalk can be slick when wet.</p>
     `,
     tip: "Spring is prime time here. Listen for red-winged blackbirds in the cattails, the mechanical winnowing of Wilson's snipe overhead at dusk, and Virginia rails calling from deep in the marsh."
   },
