@@ -88,6 +88,12 @@ a:hover { text-decoration: underline; }
   overflow-y: auto;
   transition: opacity 0.5s ease;
 }
+
+@media (max-width: 480px) {
+  #splash {
+    align-items: flex-start;
+  }
+}
 #splash.fade-out { opacity: 0; pointer-events: none; }
 
 /* Deep Salal Berry background + topo contour overlay */
@@ -148,14 +154,29 @@ a:hover { text-decoration: underline; }
   height: 64px;
   width: auto;
   flex-shrink: 0;
-  /* Cone is full color — looks great on dark bg as-is */
 }
 .splash-wordmark {
   height: 52px;
   width: auto;
-  /* Full color logo has black BG — invert to white for dark splash */
+  max-width: 220px;
   filter: brightness(0) invert(1);
   opacity: 0.88;
+}
+
+/* Stack vertically on narrow screens */
+@media (max-width: 420px) {
+  .splash-logo {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .splash-cone {
+    height: 38px;
+  }
+  .splash-wordmark {
+    height: 30px;
+    max-width: 150px;
+  }
 }
 
 /* Thin Bay Blue rule — GPC design pattern */
@@ -572,6 +593,13 @@ a:hover { text-decoration: underline; }
 /* ============================================================
    RESPONSIVE
    ============================================================ */
+@media (max-width: 480px) {
+  .splash-content {
+    padding: 48px 24px 36px;
+    gap: 18px;
+  }
+}
+
 @media (min-width: 600px) {
   .stop-panel {
     max-width: 400px;
