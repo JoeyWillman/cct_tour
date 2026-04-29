@@ -588,3 +588,152 @@ a:hover { text-decoration: underline; }
 .stop-panel::-webkit-scrollbar { width: 4px; }
 .stop-panel::-webkit-scrollbar-track { background: transparent; }
 .stop-panel::-webkit-scrollbar-thumb { background: rgba(0,101,150,0.2); border-radius: 2px; }
+/* ============================================================
+   MENU DRAWER
+   ============================================================ */
+
+/* Overlay behind drawer */
+.menu-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 450;
+  transition: opacity var(--transition);
+}
+.menu-overlay.hidden { display: none !important; }
+
+/* Drawer slides in from left */
+.menu-drawer {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: min(320px, 85vw);
+  background: var(--gpc-white);
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 4px 0 24px rgba(0,0,0,0.25);
+  transform: translateX(-100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+.menu-drawer.hidden {
+  display: flex !important; /* keep in DOM for animation */
+  transform: translateX(-100%);
+}
+.menu-drawer.open {
+  transform: translateX(0);
+}
+
+/* Drawer header */
+.menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  height: 54px;
+  background: var(--bay-blue);
+  flex-shrink: 0;
+}
+.menu-title {
+  font-family: var(--font-head);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.92);
+}
+.menu-close-btn {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.9);
+  width: 32px; height: 32px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background var(--transition);
+}
+.menu-close-btn:hover {
+  background: rgba(255,255,255,0.28);
+}
+
+/* Stop list */
+.menu-list {
+  list-style: none;
+  overflow-y: auto;
+  flex: 1;
+  padding: 8px 0;
+}
+.menu-list::-webkit-scrollbar { width: 4px; }
+.menu-list::-webkit-scrollbar-track { background: transparent; }
+.menu-list::-webkit-scrollbar-thumb { background: rgba(0,101,150,0.15); border-radius: 2px; }
+
+.menu-divider {
+  height: 1px;
+  background: var(--cloudy-dk);
+  margin: 6px 0;
+}
+
+/* Each stop button */
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background var(--transition);
+  font-family: var(--font-body);
+}
+.menu-item:hover {
+  background: rgba(0,101,150,0.07);
+}
+.menu-item:active {
+  background: rgba(0,101,150,0.14);
+}
+
+/* Home item */
+.menu-item-home {
+  padding: 14px 18px;
+}
+.menu-item-home .menu-item-icon {
+  font-size: 1.1rem;
+  color: var(--bay-blue);
+  width: 22px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.menu-item-home .menu-item-label {
+  font-family: var(--font-head);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--bay-blue);
+  letter-spacing: 0.04em;
+}
+
+/* Stop number badge in menu */
+.menu-item-badge {
+  width: 26px; height: 26px;
+  border-radius: 50% 50% 50% 3px;
+  transform: rotate(-45deg);
+  background: var(--bay-blue);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.menu-item-badge span {
+  transform: rotate(45deg);
+  font-family: var(--font-head);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+
+.menu-item-label {
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: var(--text-dark);
+  line-height: 1.3;
+}

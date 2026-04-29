@@ -6,7 +6,12 @@
 const splash      = document.getElementById('splash');
 const app         = document.getElementById('app');
 const startBtn    = document.getElementById('start-btn');
-const backBtn     = document.getElementById('back-to-splash');
+const menuBtn     = document.getElementById('menu-btn');
+const menuDrawer  = document.getElementById('menu-drawer');
+const menuOverlay = document.getElementById('menu-overlay');
+const menuClose   = document.getElementById('menu-close');
+const menuHomeBtn = document.getElementById('menu-home-btn');
+const menuList    = document.getElementById('menu-list');
 const locateBtn   = document.getElementById('locate-btn');
 const stopPanel   = document.getElementById('stop-panel');
 const closePanel  = document.getElementById('close-panel');
@@ -31,11 +36,53 @@ startBtn.addEventListener('click', () => {
   }, 500);
 });
 
-backBtn.addEventListener('click', () => {
-  app.classList.add('hidden');
-  splash.classList.remove('hidden', 'fade-out');
+// ---------- Menu Drawer ----------
+function openMenu() {
+  menuDrawer.classList.remove('hidden');
+  menuOverlay.classList.remove('hidden');
+  requestAnimationFrame(() => menuDrawer.classList.add('open'));
+}
+
+function closeMenu() {
+  menuDrawer.classList.remove('open');
+  menuOverlay.classList.add('hidden');
+  setTimeout(() => menuDrawer.classList.add('hidden'), 300);
+}
+
+menuBtn.addEventListener('click', openMenu);
+menuClose.addEventListener('click', closeMenu);
+menuOverlay.addEventListener('click', closeMenu);
+
+// Home — go back to splash
+menuHomeBtn.addEventListener('click', () => {
+  closeMenu();
   hidePanel();
+  setTimeout(() => {
+    app.classList.add('hidden');
+    splash.classList.remove('hidden', 'fade-out');
+  }, 150);
 });
+
+// Build stop list in menu after stops are available
+function buildMenuStopList() {
+  TOUR_STOPS.forEach(stop => {
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <button class="menu-item" data-stop-id="${stop.id}">
+        <div class="menu-item-badge"><span>${stop.id}</span></div>
+        <span class="menu-item-label">${stop.title}</span>
+      </button>
+    `;
+    li.querySelector('button').addEventListener('click', () => {
+      closeMenu();
+      hidePanel();
+      // Fly to marker then open panel
+      map.setView([stop.lat, stop.lng], 16, { animate: true, duration: 0.6 });
+      setTimeout(() => openPanel(stop), 400);
+    });
+    menuList.appendChild(li);
+  });
+}
 
 // ---------- Map Initialization ----------
 function initMap() {
@@ -88,6 +135,9 @@ function initMap() {
 
   // Close panel when clicking the map background
   map.on('click', hidePanel);
+
+  // Build the menu stop list now that map is ready
+  buildMenuStopList();
 }
 
 // ---------- Custom Marker ----------

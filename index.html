@@ -43,9 +43,7 @@
       <h1 class="splash-title">Clear Creek Trail<br /><em>Walking Tour</em></h1>
 
       <p class="splash-description">
-        Explore over 7 miles of riparian forest, wetlands, and salmon-bearing
-        creek winding through the heart of Kitsap County. Tap a stop to learn
-        the history, ecology, and stories along the way.
+       The Clear Creek Trail is a valuable community resource that thousands of people use each year to enhance their physical and mental health while connecting with nature. Managed by Great Peninsula Conservancy (GPC) in partnership with Kitsap County, the trail stretches from Silverdale Waterfront Park in the south to the Schold Farm in the north. It follows salmon-bearing Clear Creek as it winds through the downtown areas of Kitsap County’s largest retail center, passing through riparian habitats, wetlands, and remnant forests.
       </p>
 
       <div class="splash-instructions">
@@ -72,7 +70,7 @@
 
     <!-- Bay Blue header bar -->
     <header class="app-header">
-      <button id="back-to-splash" class="btn-icon" title="Tour info">☰</button>
+      <button id="menu-btn" class="btn-icon" title="Tour stops">☰</button>
 
       <div class="header-logo">
         <!-- Real GPC fir cone mark -->
@@ -82,6 +80,25 @@
 
       <button id="locate-btn" class="btn-icon" title="Show my location">◎</button>
     </header>
+
+    <!-- ===================== MENU DRAWER ===================== -->
+    <div id="menu-overlay" class="menu-overlay hidden"></div>
+    <nav id="menu-drawer" class="menu-drawer hidden">
+      <div class="menu-header">
+        <span class="menu-title">Tour Stops</span>
+        <button id="menu-close" class="menu-close-btn">✕</button>
+      </div>
+      <ul class="menu-list" id="menu-list">
+        <li>
+          <button class="menu-item menu-item-home" id="menu-home-btn">
+            <span class="menu-item-icon">⌂</span>
+            <span class="menu-item-label">Home</span>
+          </button>
+        </li>
+        <li class="menu-divider"></li>
+        <!-- Stop items injected by JS -->
+      </ul>
+    </nav>
 
     <!-- Map -->
     <div id="map"></div>
