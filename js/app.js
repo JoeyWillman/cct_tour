@@ -25,6 +25,7 @@ const toast       = document.getElementById('location-toast');
 let map = null;
 let locationMarker = null;
 let locationCircle = null;
+let activeMarkerEl = null; // tracks the currently lit-up marker
 
 // ---------- Splash → App ----------
 startBtn.addEventListener('click', () => {
@@ -76,9 +77,19 @@ function buildMenuStopList() {
     li.querySelector('button').addEventListener('click', () => {
       closeMenu();
       hidePanel();
-      // Fly to marker then open panel
       map.setView([stop.lat, stop.lng], 16, { animate: true, duration: 0.6 });
-      setTimeout(() => openPanel(stop), 400);
+      setTimeout(() => {
+        // Find and activate the marker element
+        const markerEls = document.querySelectorAll('.marker-inner');
+        markerEls.forEach(el => {
+          if (el.textContent.trim() === String(stop.id)) {
+            if (activeMarkerEl) activeMarkerEl.classList.remove('active');
+            activeMarkerEl = el;
+            activeMarkerEl.classList.add('active');
+          }
+        });
+        openPanel(stop);
+      }, 400);
     });
     menuList.appendChild(li);
   });
@@ -155,8 +166,12 @@ function addStopMarker(stop) {
     .addTo(map)
     .on('click', (e) => {
       L.DomEvent.stopPropagation(e);
+      // Deactivate previous marker
+      if (activeMarkerEl) activeMarkerEl.classList.remove('active');
+      // Activate this marker
+      activeMarkerEl = e.target.getElement().querySelector('.marker-inner');
+      if (activeMarkerEl) activeMarkerEl.classList.add('active');
       openPanel(stop);
-      // Pan map so marker isn't hidden behind the panel
       map.panTo([stop.lat, stop.lng], { animate: true, duration: 0.5 });
     });
 
@@ -198,6 +213,11 @@ function openPanel(stop) {
 function hidePanel() {
   stopPanel.classList.remove('open');
   setTimeout(() => stopPanel.classList.add('hidden'), 300);
+  // Deactivate marker
+  if (activeMarkerEl) {
+    activeMarkerEl.classList.remove('active');
+    activeMarkerEl = null;
+  }
 }
 
 closePanel.addEventListener('click', hidePanel);

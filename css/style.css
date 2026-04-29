@@ -390,7 +390,8 @@ a:hover { text-decoration: underline; }
   font-weight: 700;
   color: var(--gpc-white);
 }
-.stop-marker:hover .marker-inner {
+.stop-marker:hover .marker-inner,
+.marker-inner.active {
   background: var(--gpc-teal);
   box-shadow: 0 5px 16px rgba(0,0,0,0.4), 0 0 0 2px var(--gpc-teal-lt);
 }
