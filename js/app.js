@@ -47,34 +47,34 @@ function initMap() {
     zoomControl: true
   });
 
-  // Basemap: Stadia Stamen Terrain — topographic, nature-forward, no API key needed
-  // Matches GPC's topo aesthetic and works well for trail maps
-  L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_terrain/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; <a href="https://stamen.com">Stamen Design</a> &copy; <a href="https://stadiamaps.com">Stadia Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  // Basemap: CartoDB Voyager — clean, modern, free, no API key
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
+    subdomains: 'abcd',
     minZoom: 0,
-    maxZoom: 18
+    maxZoom: 19
   }).addTo(map);
 
   // Load trail GeoJSON — drawn below stop markers so markers sit on top
   fetch('assets/trail.json')
     .then(res => res.json())
     .then(data => {
-      // Outer stroke — dark outline for contrast against basemap
+      // Outer stroke — white halo for clean separation from basemap
       L.geoJSON(data, {
         style: {
-          color: '#004a6e',
-          weight: 7,
+          color: '#ffffff',
+          weight: 6,
           opacity: 0.9,
           lineCap: 'round',
           lineJoin: 'round'
         }
       }).addTo(map);
 
-      // Inner line — GPC Bay Blue on top
+      // Inner line — GPC Bay Blue
       L.geoJSON(data, {
         style: {
           color: '#006596',
-          weight: 4,
+          weight: 3,
           opacity: 1,
           lineCap: 'round',
           lineJoin: 'round'
