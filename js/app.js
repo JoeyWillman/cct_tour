@@ -55,6 +55,34 @@ function initMap() {
     maxZoom: 18
   }).addTo(map);
 
+  // Load trail GeoJSON — drawn below stop markers so markers sit on top
+  fetch('assets/trail.json')
+    .then(res => res.json())
+    .then(data => {
+      // Outer stroke — dark outline for contrast against basemap
+      L.geoJSON(data, {
+        style: {
+          color: '#004a6e',
+          weight: 7,
+          opacity: 0.9,
+          lineCap: 'round',
+          lineJoin: 'round'
+        }
+      }).addTo(map);
+
+      // Inner line — GPC Bay Blue on top
+      L.geoJSON(data, {
+        style: {
+          color: '#006596',
+          weight: 4,
+          opacity: 1,
+          lineCap: 'round',
+          lineJoin: 'round'
+        }
+      }).addTo(map);
+    })
+    .catch(err => console.warn('Trail GeoJSON failed to load:', err));
+
   // Add all tour stop markers
   TOUR_STOPS.forEach(stop => addStopMarker(stop));
 
