@@ -126,10 +126,32 @@
   <script>
 const TOUR_STOPS = [
 
+ {
+    id: 1,
+    title: "Silverdale Waterfront Park",
+    lat: 47.64421821,
+    lng: -122.6942896,
+    img: "assets/waterfront.jpg",
+    tags: ["Trailhead", "History", "Waterfront"],
+    body: `
+      <p>Welcome to the southern trailhead of the Clear Creek Trail. <strong>Silverdale Waterfront Park</strong>
+      sits on the shores of Dyes Inlet and marks the end of
+      Clear Creek's journey from Petersen Farm, down through the heart
+      of Silverdale.</p>
+      <p>This shoreline has been a gathering place for thousands of years. The Suquamish people,
+      whose ancestral territory encompasses the Kitsap Peninsula, harvested shellfish, salmon, and
+      camas along these shores long before European settlers arrived in the 1800s. The waterfront
+      you see today bears little resemblance to the tidal marsh that once extended inland, much of
+      which was filled during Silverdale's commercial development in the mid-20th century.</p>
+      <p>The trail stretching north from here follows Clear Creek for over seven miles through
+      wetlands, riparian forest, and restored floodplain. </p>
+    `,
+    tip: "Scan Dyes Inlet for diving ducks in winter — surf scoters, buffleheads, and common goldeneyes are regulars. Bald eagles frequently perch in the large conifers along the shoreline."
+  },
 
   // ----------------------------------------------------------
    {
-    id: 1,
+    id: 2,
     title: "Port of Silverdale",
     lat: 47.64374777480037,
     lng: -122.6952140520602,
@@ -159,42 +181,43 @@ const TOUR_STOPS = [
     tip: "The port pier is a great spot to scan Dyes Inlet for marine wildlife — harbor seals regularly haul out on the floats, and Steller sea lions occasionally pass through in winter. The boat ramp area is a reliable spot for black oystercatchers at low tide."
   },
 
-
-  // ----------------------------------------------------------
-  {
-    id: 2,
-    title: "Silverdale Waterfront Park",
-    lat: 47.64421821,
-    lng: -122.6942896,
-    img: "assets/waterfront.jpg",
-    tags: ["Trailhead", "History", "Waterfront"],
-    body: `
-      <p>Welcome to the southern trailhead of the Clear Creek Trail. Silverdale Waterfront Park
-      sits on the shores of Dyes Inlet and marks the end of
-      Clear Creek's journey from Petersen Farm, down through the heart
-      of Silverdale.</p>
-      <p>This shoreline has been a gathering place for thousands of years. The Suquamish people,
-      whose ancestral territory encompasses the Kitsap Peninsula, harvested shellfish, salmon, and
-      camas along these shores long before European settlers arrived in the 1800s. The waterfront
-      you see today bears little resemblance to the tidal marsh that once extended inland, much of
-      which was filled during Silverdale's commercial development in the mid-20th century.</p>
-      <p>The trail stretching north from here follows Clear Creek for over seven miles through
-      wetlands, riparian forest, and restored floodplain. </p>
-    `,
-    tip: "Scan Dyes Inlet for diving ducks in winter — surf scoters, buffleheads, and common goldeneyes are regulars. Bald eagles frequently perch in the large conifers along the shoreline."
-  },
-
-
-  // ----------------------------------------------------------
+// ----------------------------------------------------------
   {
     id: 3,
+    title: "Dyes Inlet",
+    lat: 47.648254622744034,
+    lng: -122.6899066341633,
+    img: "assets/inlet.jpg",
+    tags: ["Ecology", "Puget Sound", "Water Quality"],
+    body: `
+      <p><strong>Dyes Inlet</strong> is a 5-mile arm of Puget Sound, and the ultimate
+      destination of everything that flows through the Clear Creek watershed. Clear Creek empties here, carrying with it the water quality story of the entire
+      valley.</p>
+      <p>In 1841, Captain Wilkes sailed through a narrow channel from Puget Sound into a large bay roughly dividing the geographical area eventually to be Kitsap County in half. He named the bay Dyes Inlet, after his ship taxidermist. But, long before Capt. Wilkes and Mr. Dyes, the Suquamish Indians named the bay Sa'qad (tsock-od).</p>
+      <p>The inlet supports active shellfish harvesting: clams, oysters, and mussels, but its
+      water quality has long been stressed by development in the surrounding watershed. Portions of
+      Dyes Inlet were closed to shellfish harvest for years due to fecal coliform contamination,
+      much of it traced to stormwater runoff from Silverdale's commercial developments. The north end
+      of the inlet, near Silverdale Waterfront Park, acts like a collecting basin, what one
+      researcher described as "the end of a sock", where currents pile up debris, pollutants,
+      and sediment washed in from upstream.</p>
+      <p>Southern resident orcas have been documented entering Dyes Inlet in pursuit of chum
+      salmon, making the health of this water deeply connected to the survival of one of the
+      Pacific Northwest's most iconic and endangered species.</p>
+    `,
+    tip: "In November, scan the inlet for surfacing orcas, southern residents occasionally enter Dyes Inlet chasing chum salmon. Brant geese, surf scoters, and western grebes use the inlet in winter."
+  },
+  // ----------------------------------------------------------
+ 
+  {
+    id: 4,
     title: "Old Mill Park",
     lat: 47.65005222,
     lng: -122.6886046,
     img: "assets/dyes.jpg",
     tags: ["History", "Industry", "Access Point"],
     body: `
-      <p>Old Mill Park takes its name from one of Silverdale's earliest industries. A sawmill
+      <p><strong>Old Mill Park</strong> takes its name from one of Silverdale's earliest industries. A sawmill
       operated near this site in the late 1800s, processing timber from the old-growth forest that
       once blanketed the Kitsap Peninsula made up of Douglas fir, western red cedar, and hemlock, many
       centuries old when the first axes arrived.</p>
@@ -210,33 +233,7 @@ const TOUR_STOPS = [
   },
 
 
-  // ----------------------------------------------------------
-  {
-    id: 4,
-    title: "Dyes Inlet",
-    lat: 47.648254622744034,
-    lng: -122.6899066341633,
-    img: "assets/inlet.jpg",
-    tags: ["Ecology", "Puget Sound", "Water Quality"],
-    body: `
-      <p><strong>Dyes Inlet</strong> is a 5-mile arm of Puget Sound, and the ultimate
-      destination of everything that flows through the Clear Creek watershed. The creek you've
-      been walking alongside empties here, carrying with it the water quality story of the entire
-      valley: the pollutants filtered by wetlands, the sediment captured by the beaver pond, the
-      flood pulses slowed by the restored floodplain.</p>
-      <p>The inlet supports active shellfish harvesting: clams, oysters, and mussels, but its
-      water quality has long been stressed by development in the surrounding watershed. Portions of
-      Dyes Inlet were closed to shellfish harvest for years due to fecal coliform contamination,
-      much of it traced to stormwater runoff from Silverdale's commercial developments. The north end
-      of the inlet, near Silverdale Waterfront Park, acts like a collecting basin, what one
-      researcher described as "the end of a sock", where currents pile up debris, pollutants,
-      and sediment washed in from upstream.</p>
-      <p>Southern resident orcas have been documented entering Dyes Inlet in pursuit of chum
-      salmon, making the health of this water deeply connected to the survival of one of the
-      Pacific Northwest's most iconic and endangered species.</p>
-    `,
-    tip: "In November, scan the inlet for surfacing orcas, southern residents occasionally enter Dyes Inlet chasing chum salmon. Brant geese, surf scoters, and western grebes use the inlet in winter."
-  },
+
 
   // ----------------------------------------------------------
   {
@@ -247,7 +244,7 @@ const TOUR_STOPS = [
     img: "assets/estuary.jpg",
     tags: ["Ecology", "Salmon", "Estuary"],
     body: `
-      <p>Estuaries, where freshwater meets saltwater, are among the most biologically productive
+      <p><strong>Estuaries</strong>, where freshwater meets saltwater, are among the most biologically productive
       ecosystems on the planet. The tidal zone where Clear Creek empties into Dyes Inlet is critical
       transition habitat for salmon. Juvenile coho and chum, hatched in Clear Creek's upstream gravel
       beds, spend weeks in this brackish mixing zone gradually acclimating to salt water before
@@ -268,14 +265,14 @@ const TOUR_STOPS = [
   // ----------------------------------------------------------
   {
     id: 6,
-    title: "Estuary Viewing Platform",
+    title: "Estuary Viewing Platform and Riparian Habitat",
     lat: 47.65108873,
     lng: -122.6853656,
     img: "assets/estuaryviewing.jpg",
     tags: ["Viewpoint", "Wildlife", "Accessible"],
     body: `
       <p>This viewing platform lets you observe the creek and its riparian corridor without
-      disturbing the habitat below. Riparian zones, the narrow band of vegetation lining a
+      disturbing the habitat below. <Riparian zones, the narrow band of vegetation lining a
       streambank, are disproportionately important for wildlife. Though they cover only a small
       fraction of the landscape, an estimated 70–80% of Pacific Northwest wildlife species rely
       on them at some point in their lives.</p>
@@ -298,11 +295,10 @@ const TOUR_STOPS = [
     img: "assets/redbarn.jpg",
     tags: ["History", "Education", "Suquamish", "GPC"],
     body: `
-      <p>The red barn here is the <strong>Clear Creek Sa'qad Interpretive Center</strong>, a
-      newly renovated space that serves as the hub for Great Peninsula Conservancy events,
-      community gatherings, and environmental education along the trail. "Sa'qad" is a Lushootseed
-      word — the language of the Suquamish and other Coast Salish peoples whose territory has
-      encompassed the Kitsap Peninsula for thousands of years.</p>
+    <p>In <strong>1950</strong>, Kirk Best built a barn at the mouth of Clear Creek, using surplus materials from nearby army barracks and barn boards and poles from an even older barn. The barn, named Tides End by the Best family, sat sentinel on the estuary while Harriet and Kirk Best raised their family. </p> <p> They sold their farm to Carlton and Betty Smith in <strong>1960</strong>.  The Smith family lived there, raising their family, for 30 years before donating the barn and surrounding property to the Kitsap Land Trust now the <strong>Great Peninsula Conservancy</strong>, thus providing the impetus to the start of the Clear Creek Trail System.  In 1995, after years of neglect, the Clear Creek Task Force began the long process and tremendous task of restoring and renovating the old barn into a small environmental, historical interpretive center.<p/>
+      <p>Today, the newly renovated<strong> Clear Creek Sa'qad Interpretive Center</strong>, a
+      serves as the hub for Great Peninsula Conservancy events,
+      community gatherings, and environmental education along the trail.</p>
       <p>From volunteer stewardship days to school field trips to community events, the barn is
       where the Clear Creek community comes together. Check out what's happening at the Red Barn: <a href="https://greatpeninsula.org/event-calendar/" target="_blank" rel="noopener">greatpeninsula.org/event-calendar</a>.</p>
     `,
@@ -320,8 +316,8 @@ const TOUR_STOPS = [
     tags: ["Rest Stop", "Viewpoint", "Accessible"],
     body: `
       <p>The Ridgetop Pavilion is the meeting place for Clear Creek Trail work parties and
-      volunteer events. If you're interested in giving back to this trail — pulling invasives,
-      maintaining the boardwalk, or restoring habitat — this is where it starts.</p>
+      volunteer events. If you're interested in giving back to this trail by pulling invasives,
+      maintaining the boardwalk, or restoring habitat, this is where it starts.</p>
       <p>Find upcoming events and get involved at <a href="https://greatpeninsula.org/what-we-do/community-engagement/clear-creek-trail/clear-creek-trail-team/" target="_blank" rel="noopener">greatpeninsula.org/clear-creek-trail-team</a>.</p>
     `,
     tip: ""
@@ -377,10 +373,7 @@ const TOUR_STOPS = [
       allowing sediments and some pollutants to settle out, and releasing water at a slower rate.</p>
       <p>Kitsap County's stormwater program has worked to naturalize many of these facilities,
       replacing mowed grass with native wetland plants that filter nutrients, provide habitat,
-      and absorb additional water. One regional facility along Silverdale Way manages and treats
-      runoff from approximately 115 acres of surrounding development before it reaches the creek.
-      It's infrastructure and ecology working together — an approach that will only become more
-      important as the climate shifts and storm intensity increases.</p>
+      and absorb additional water.</p>
     `,
     tip: "Naturalized stormwater ponds attract surprisingly good wildlife, watch for great blue herons, belted kingfishers, and dabbling ducks using the open water. Swallows hunt insects over the surface on summer evenings."
   },
