@@ -769,3 +769,514 @@ a:hover { text-decoration: underline; }
   color: var(--text-dark);
   line-height: 1.3;
 }
+/* ============================================================
+   CATEGORY MARKERS (no numbers, icon + color)
+   ============================================================ */
+
+/* Override old numbered marker */
+.marker-inner {
+  width: 36px; height: 36px;
+  border-radius: 50% 50% 50% 4px;
+  transform: rotate(-45deg);
+  border: 2px solid rgba(255,255,255,0.9) !important;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.35);
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  /* background set inline per category */
+}
+.marker-inner svg {
+  width: 16px; height: 16px;
+  transform: rotate(45deg); /* counter-rotate so icon stays upright */
+  color: #fff;
+  stroke: #fff;
+  flex-shrink: 0;
+}
+.stop-marker:hover .marker-inner,
+.marker-inner.active {
+  transform: rotate(-45deg) scale(1.18);
+  box-shadow: 0 5px 18px rgba(0,0,0,0.45);
+  filter: brightness(1.15);
+}
+
+/* ============================================================
+   PANEL CATEGORY CHIP
+   ============================================================ */
+.panel-category-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px 3px 6px;
+  border-radius: 99px;
+  border: 1px solid;
+  font-family: var(--font-head);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.panel-category-chip .chip-icon {
+  width: 14px; height: 14px;
+  display: flex; align-items: center;
+}
+.panel-category-chip .chip-icon svg {
+  width: 14px; height: 14px;
+  stroke: currentColor;
+}
+
+/* Panel badge — now circular, category color, icon inside */
+.panel-badge {
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  width: 36px; height: 36px;
+  border-radius: 50% 50% 50% 4px;
+  transform: rotate(-45deg);
+  margin-bottom: 14px;
+  flex-shrink: 0;
+}
+.panel-badge svg {
+  width: 16px; height: 16px;
+  transform: rotate(45deg);
+  stroke: #fff;
+  color: #fff;
+}
+
+/* ============================================================
+   MAP LEGEND
+   ============================================================ */
+.map-legend {
+  background: rgba(255,255,255,0.95);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  border: 1px solid rgba(0,0,0,0.08);
+  min-width: 190px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 0;
+}
+.legend-item:not(:last-child) {
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  padding-bottom: 6px;
+  margin-bottom: 2px;
+}
+.legend-dot {
+  width: 28px; height: 28px;
+  border-radius: 50% 50% 50% 4px;
+  transform: rotate(-45deg);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  border: 2px solid rgba(255,255,255,0.9);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+}
+.legend-dot svg {
+  width: 12px; height: 12px;
+  transform: rotate(45deg);
+  stroke: #fff;
+  color: #fff;
+}
+.legend-label {
+  font-family: var(--font-head);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  line-height: 1.2;
+}
+
+/* ============================================================
+   MENU CATEGORY HEADINGS
+   ============================================================ */
+.menu-category-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px 6px;
+  font-family: var(--font-head);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+.menu-cat-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Menu item badge — now square icon, no number */
+.menu-item-badge {
+  width: 28px; height: 28px;
+  border-radius: 50% 50% 50% 3px;
+  transform: rotate(-45deg);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  border: 1.5px solid rgba(255,255,255,0.8);
+}
+.menu-item-icon {
+  transform: rotate(45deg);
+  display: flex; align-items: center;
+}
+.menu-item-icon svg {
+  width: 13px; height: 13px;
+  stroke: #fff;
+  color: #fff;
+}
+
+/* ============================================================
+   PHOTO SLIDESHOW
+   ============================================================ */
+.panel-slideshow {
+  width: calc(100% + 52px);
+  margin: 0 -26px 18px -26px;
+}
+
+.slideshow-track {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  background: var(--cloudy-dk);
+}
+
+.panel-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: opacity 0.15s ease;
+  border-top: 3px solid var(--bay-blue);
+}
+
+.slideshow-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px 4px;
+  background: var(--cloudy-dk);
+}
+
+.slide-btn {
+  background: var(--bay-blue);
+  color: #fff;
+  border: none;
+  width: 30px; height: 30px;
+  border-radius: var(--radius-sm);
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: background var(--transition);
+}
+.slide-btn:hover { background: var(--bay-blue-lt); }
+
+.slideshow-footer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.slide-caption {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-style: italic;
+  line-height: 1.4;
+  display: none;
+}
+
+.slide-counter {
+  font-family: var(--font-head);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--bay-blue);
+  letter-spacing: 0.06em;
+  display: none;
+}
+
+/* ============================================================
+   VIDEO EMBED
+   ============================================================ */
+.panel-video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: none;
+  background: #000;
+  transition: opacity 0.15s ease;
+}
+
+/* ============================================================
+   BIRDS PANEL
+   ============================================================ */
+.birds-panel {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: var(--cloudy);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  box-shadow: var(--shadow-panel);
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  max-height: 82vh;
+  transform: translateY(100%);
+  transition: transform var(--transition);
+  border-top: 4px solid #748d39;
+}
+.birds-panel.open { transform: translateY(0); }
+
+.birds-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px 10px;
+  flex-shrink: 0;
+}
+.birds-panel-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-head);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #4a5e28;
+}
+.birds-panel-title svg { stroke: #748d39; }
+
+/* Sub-tabs */
+.birds-tabs {
+  display: flex;
+  border-bottom: 2px solid var(--cloudy-dk);
+  flex-shrink: 0;
+  padding: 0 18px;
+  gap: 4px;
+}
+.birds-tab {
+  background: none;
+  border: none;
+  padding: 8px 14px;
+  font-family: var(--font-head);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: color var(--transition), border-color var(--transition);
+}
+.birds-tab.active {
+  color: #748d39;
+  border-bottom-color: #748d39;
+}
+.birds-tab:hover { color: #748d39; }
+
+/* Content area */
+.birds-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0;
+}
+.birds-content::-webkit-scrollbar { width: 4px; }
+.birds-content::-webkit-scrollbar-thumb { background: rgba(116,141,57,0.2); border-radius: 2px; }
+
+.birds-meta {
+  font-family: var(--font-head);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  padding: 10px 18px 6px;
+}
+
+.birds-date-group {
+  margin-bottom: 4px;
+}
+.birds-date-header {
+  font-family: var(--font-head);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gpc-white);
+  background: #748d39;
+  padding: 5px 18px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.birds-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 18px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  transition: background var(--transition);
+}
+.birds-row:hover { background: rgba(116,141,57,0.06); }
+
+.birds-name {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+.birds-common {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+.birds-sci {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-style: italic;
+  color: var(--text-muted);
+}
+.birds-count {
+  font-family: var(--font-head);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #748d39;
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+
+/* Loading + empty states */
+.birds-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 48px 24px;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+}
+.birds-spinner {
+  width: 28px; height: 28px;
+  border: 3px solid rgba(116,141,57,0.2);
+  border-top-color: #748d39;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.birds-empty {
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+/* Footer */
+.birds-footer {
+  padding: 10px 18px;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--cloudy-dk);
+  flex-shrink: 0;
+}
+.birds-footer a { color: #748d39; }
+
+/* Menu Birds button */
+.menu-item-birds {
+  color: #748d39;
+}
+.menu-item-icon-birds svg { stroke: #748d39; }
+.menu-item-birds .menu-item-label {
+  font-weight: 600;
+  color: #4a5e28;
+}
+
+/* eBird button inside stop panel */
+.ebird-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 16px;
+  padding: 10px 18px;
+  background: #748d39;
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-head);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+  box-shadow: 0 2px 10px rgba(116,141,57,0.35);
+}
+.ebird-btn:hover {
+  background: #5a7029;
+  transform: translateY(-1px);
+}
+.ebird-btn svg { stroke: #fff; flex-shrink: 0; }
+
+/* Desktop sidebar for birds panel */
+@media (min-width: 600px) {
+  .birds-panel {
+    max-width: 400px;
+    left: 12px; right: auto;
+    bottom: 12px;
+    border-radius: var(--radius-md);
+    border-top: 4px solid #748d39;
+    transform: translateX(-120%);
+    max-height: calc(100vh - 78px);
+  }
+  .birds-panel.open { transform: translateX(0); }
+}
+
+/* ============================================================
+   BIRDS LAUNCH BUTTON (inside Birds of Clear Creek stop panel)
+   ============================================================ */
+.birds-launch-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px 18px;
+  background: #748d39;
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-head);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+  box-shadow: 0 3px 12px rgba(116,141,57,0.35);
+}
+.birds-launch-btn:hover {
+  background: #8fac45;
+  transform: translateY(-1px);
+}
+
+/* Menu birds button accent */
+.menu-item-birds .menu-item-label {
+  color: #748d39;
+  font-weight: 600;
+}
+.menu-item-birds .menu-item-icon-birds svg {
+  stroke: #748d39;
+}
