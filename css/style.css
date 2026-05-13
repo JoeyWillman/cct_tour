@@ -1273,10 +1273,207 @@ a:hover { text-decoration: underline; }
 }
 
 /* Menu birds button accent */
-.menu-item-birds .menu-item-label {
-  color: #748d39;
+.menu-item-birds .menu-item-label,
+.menu-item-home .menu-item-label {
   font-weight: 600;
 }
-.menu-item-birds .menu-item-icon-birds svg {
-  stroke: #748d39;
+
+/* ============================================================
+   WEATHER WIDGET
+   ============================================================ */
+.weather-widget {
+  background: var(--gpc-white);
+  border-bottom: 2px solid var(--cloudy-dk);
+  padding: 14px 16px 12px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.weather-loading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  min-height: 48px;
+}
+
+.weather-current {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.weather-main {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.weather-icon-large {
+  font-size: 2.4rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.weather-temps-main {
+  flex: 1;
+}
+
+.weather-temp {
+  font-family: var(--font-head);
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--bay-blue-dk);
+  line-height: 1;
+}
+
+.weather-condition {
+  font-family: var(--font-head);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  margin-top: 2px;
+}
+
+.weather-meta {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Trail advice callout */
+.weather-advice {
+  font-family: var(--font-head);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-left: 3px solid;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: rgba(0,0,0,0.04);
+  letter-spacing: 0.02em;
+}
+
+/* 5-day forecast strip */
+.weather-forecast {
+  display: flex;
+  gap: 4px;
+  margin-top: 12px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+.weather-forecast::-webkit-scrollbar { display: none; }
+
+.weather-day {
+  flex: 1;
+  min-width: 52px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  background: var(--cloudy);
+  border-radius: var(--radius-sm);
+  padding: 8px 4px 6px;
+}
+
+.weather-day-label {
+  font-family: var(--font-head);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.weather-day-icon {
+  font-size: 1.3rem;
+  line-height: 1;
+  margin: 2px 0;
+}
+
+.weather-day-temps {
+  display: flex;
+  gap: 4px;
+  font-family: var(--font-head);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.weather-hi { color: var(--bay-blue-dk); }
+.weather-lo { color: var(--text-muted); }
+
+.weather-day-pcp {
+  font-size: 0.62rem;
+  color: var(--gpc-teal);
+  font-family: var(--font-body);
+}
+
+.weather-credit {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  margin-top: 10px;
+  text-align: right;
+}
+.weather-credit a { color: var(--gpc-teal); }
+
+.weather-error {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--bluff);
+  padding: 8px 0;
+}
+/* ============================================================
+   WEATHER BAR — slides down from header
+   ============================================================ */
+.weather-bar {
+  position: absolute;
+  top: 54px; /* header height */
+  left: 0; right: 0;
+  background: var(--gpc-white);
+  z-index: 390;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+  transform: translateY(-110%);
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+  border-bottom: 3px solid var(--bay-blue);
+  max-height: 70vh;
+  overflow-y: auto;
+}
+.weather-bar.open {
+  transform: translateY(0);
+}
+
+.weather-bar-content {
+  padding: 16px 18px 12px;
+}
+
+.weather-bar-close {
+  width: 100%;
+  padding: 10px;
+  background: var(--cloudy);
+  border: none;
+  border-top: 1px solid var(--cloudy-dk);
+  font-family: var(--font-head);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background var(--transition);
+}
+.weather-bar-close:hover {
+  background: var(--cloudy-dk);
+  color: var(--text-dark);
+}
+
+/* Simple icon for top menu items (no teardrop badge) */
+.menu-item-icon-simple {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }

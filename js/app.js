@@ -465,6 +465,32 @@ function closeBirdsPanel() {
 birdsClose.addEventListener('click', closeBirdsPanel);
 menuBirdsBtn.addEventListener('click', () => openBirdsPanel('recent'));
 
+// ---------- Weather Bar ----------
+const weatherBar      = document.getElementById('weather-bar');
+const weatherBarContent = document.getElementById('weather-bar-content');
+const weatherBarClose = document.getElementById('weather-bar-close');
+const menuWeatherBtn  = document.getElementById('menu-weather-btn');
+
+let weatherLoaded = false;
+
+function openWeatherBar() {
+  closeMenu();
+  weatherBar.classList.remove('hidden');
+  requestAnimationFrame(() => weatherBar.classList.add('open'));
+  if (!weatherLoaded) {
+    loadWeather();
+    weatherLoaded = true;
+  }
+}
+
+function closeWeatherBar() {
+  weatherBar.classList.remove('open');
+  setTimeout(() => weatherBar.classList.add('hidden'), 300);
+}
+
+menuWeatherBtn.addEventListener('click', openWeatherBar);
+weatherBarClose.addEventListener('click', closeWeatherBar);
+
 // Tab switching
 birdsTabs.forEach(tab => {
   tab.addEventListener('click', () => switchBirdsTab(tab.dataset.tab));
@@ -641,4 +667,123 @@ function maybeInjectBirdsButton(stop) {
     openBirdsPanel('recent');
   });
   panelBody.appendChild(btn);
+}
+
+// ============================================================
+//  WEATHER WIDGET — Open-Meteo (free, no API key required)
+//  Coordinates: Clear Creek Trail, Silverdale WA
+// ============================================================
+const WEATHER_LAT = 47.658;
+const WEATHER_LNG = -122.689;
+
+const WMO_CODES = {
+  0:  { label: 'Clear',           icon: '☀️' },
+  1:  { label: 'Mostly Clear',    icon: '🌤️' },
+  2:  { label: 'Partly Cloudy',   icon: '⛅' },
+  3:  { label: 'Overcast',        icon: '☁️' },
+  45: { label: 'Foggy',           icon: '🌫️' },
+  48: { label: 'Icy Fog',         icon: '🌫️' },
+  51: { label: 'Light Drizzle',   icon: '🌦️' },
+  53: { label: 'Drizzle',         icon: '🌦️' },
+  55: { label: 'Heavy Drizzle',   icon: '🌧️' },
+  61: { label: 'Light Rain',      icon: '🌧️' },
+  63: { label: 'Rain',            icon: '🌧️' },
+  65: { label: 'Heavy Rain',      icon: '🌧️' },
+  71: { label: 'Light Snow',      icon: '🌨️' },
+  73: { label: 'Snow',            icon: '❄️' },
+  75: { label: 'Heavy Snow',      icon: '❄️' },
+  80: { label: 'Light Showers',   icon: '🌦️' },
+  81: { label: 'Showers',         icon: '🌧️' },
+  82: { label: 'Heavy Showers',   icon: '⛈️' },
+  95: { label: 'Thunderstorm',    icon: '⛈️' },
+  96: { label: 'Thunderstorm',    icon: '⛈️' },
+  99: { label: 'Thunderstorm',    icon: '⛈️' },
+};
+
+function getWmo(code) {
+  return WMO_CODES[code] || { label: 'Unknown', icon: '🌡️' };
+}
+
+function getTrailAdvice(code, windspeed, tempF) {
+  if ([95, 96, 99].includes(code)) return { text: 'Stay off trail — thunderstorm', color: '#a45734' };
+  if ([65, 75, 82].includes(code)) return { text: 'Heavy precipitation — not ideal', color: '#a45734' };
+  if (windspeed > 30)              return { text: 'Very windy — use caution', color: '#eaab10' };
+  if ([61, 63, 71, 73, 80, 81].includes(code)) return { text: 'Dress for rain — trail may be muddy', color: '#19796d' };
+  if ([51, 53, 55].includes(code)) return { text: 'Light drizzle — layers recommended', color: '#19796d' };
+  if (tempF < 32)                  return { text: 'Freezing — watch for ice on boardwalk', color: '#eaab10' };
+  if (tempF > 85)                  return { text: 'Hot day — bring extra water', color: '#eaab10' };
+  return { text: 'Good conditions for the trail', color: '#748d39' };
+}
+
+function getDayLabel(dateStr, index) {
+  if (index === 0) return 'Today';
+  if (index === 1) return 'Tomorrow';
+  const d = new Date(dateStr + 'T12:00:00');
+  return d.toLocaleDateString('en-US', { weekday: 'short' });
+}
+
+async function loadWeather() {
+  const container = document.getElementById('weather-bar-content');
+  if (!container) return;
+
+  container.innerHTML = `<div class="weather-loading"><div class="birds-spinner"></div><span>Loading weather…</span></div>`;
+
+  try {
+    const url = `https://api.open-meteo.com/v1/forecast`
+      + `?latitude=${WEATHER_LAT}&longitude=${WEATHER_LNG}`
+      + `&current=temperature_2m,apparent_temperature,weathercode,windspeed_10m,precipitation`
+      + `&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum`
+      + `&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch`
+      + `&timezone=America%2FLos_Angeles&forecast_days=5`;
+
+    const res  = await fetch(url);
+    const data = await res.json();
+    const cur  = data.current;
+    const day  = data.daily;
+
+    const wmo    = getWmo(cur.weathercode);
+    const temp   = Math.round(cur.temperature_2m);
+    const feels  = Math.round(cur.apparent_temperature);
+    const wind   = Math.round(cur.windspeed_10m);
+    const advice = getTrailAdvice(cur.weathercode, wind, temp);
+
+    const forecastHTML = day.time.slice(0, 5).map((date, i) => {
+      const w   = getWmo(day.weathercode[i]);
+      const hi  = Math.round(day.temperature_2m_max[i]);
+      const lo  = Math.round(day.temperature_2m_min[i]);
+      const pcp = day.precipitation_sum[i];
+      return `
+        <div class="weather-day">
+          <div class="weather-day-label">${getDayLabel(date, i)}</div>
+          <div class="weather-day-icon">${w.icon}</div>
+          <div class="weather-day-temps">
+            <span class="weather-hi">${hi}°</span>
+            <span class="weather-lo">${lo}°</span>
+          </div>
+          ${pcp > 0.01 ? `<div class="weather-day-pcp">💧${pcp.toFixed(2)}"</div>` : ''}
+        </div>
+      `;
+    }).join('');
+
+    container.innerHTML = `
+      <div class="weather-current">
+        <div class="weather-main">
+          <div class="weather-icon-large">${wmo.icon}</div>
+          <div class="weather-temps-main">
+            <div class="weather-temp">${temp}°F</div>
+            <div class="weather-condition">${wmo.label}</div>
+            <div class="weather-meta">Feels like ${feels}°F &middot; Wind ${wind} mph</div>
+          </div>
+        </div>
+        <div class="weather-advice" style="border-left-color:${advice.color}; color:${advice.color}">
+          ${advice.text}
+        </div>
+      </div>
+      <div class="weather-forecast">${forecastHTML}</div>
+      <div class="weather-credit">Weather via <a href="https://open-meteo.com" target="_blank" rel="noopener">Open-Meteo</a> · Silverdale, WA</div>
+    `;
+  } catch (err) {
+    container.innerHTML = `<div class="weather-error">Weather unavailable — check your connection.</div>`;
+    console.warn('Weather error:', err);
+  }
 }
